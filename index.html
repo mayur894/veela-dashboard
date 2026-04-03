@@ -113,9 +113,13 @@
   </div>
 
   <script>
-    const statusClass = (s='').toLowerCase().includes('green') || s==='done' ? 'green' :
-      (s.toLowerCase().includes('amber') || s==='conditional' || s==='upcoming' || s==='next' || s==='warning') ? 'amber' :
-      (s==='active' ? 'teal' : 'red');
+    const statusClass = (s = '') => {
+      const v = String(s).toLowerCase();
+      if (v.includes('green') || v === 'done' || v === 'passed') return 'green';
+      if (v.includes('amber') || v === 'conditional' || v === 'upcoming' || v === 'next' || v === 'warning') return 'amber';
+      if (v === 'active' || v === 'teal') return 'teal';
+      return 'red';
+    };
 
     const pill = (text, status) => `<span class="pill ${statusClass(status)}">${text}</span>`;
 
