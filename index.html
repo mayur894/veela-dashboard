@@ -95,22 +95,33 @@
       gap: 1rem;
     }
 
-    .eyebrow {
+    .eyebrow,
+    .live-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.45rem 0.8rem;
-      border: 1px solid rgba(125, 211, 252, 0.18);
       border-radius: 999px;
-      background: rgba(125, 211, 252, 0.08);
-      color: #c4ebff;
       font-size: 0.76rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .eyebrow::before {
+    .eyebrow {
+      border: 1px solid rgba(125, 211, 252, 0.18);
+      background: rgba(125, 211, 252, 0.08);
+      color: #c4ebff;
+    }
+
+    .live-badge {
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      background: rgba(52, 211, 153, 0.1);
+      color: #b8ffe7;
+    }
+
+    .eyebrow::before,
+    .live-badge::before {
       content: "";
       width: 0.55rem;
       height: 0.55rem;
@@ -136,6 +147,19 @@
       align-content: start;
     }
 
+    .hero-topline,
+    .hero-toolbar,
+    .refresh-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-toolbar {
+      justify-content: space-between;
+    }
+
     .hero-copy p {
       max-width: 58ch;
       color: var(--muted);
@@ -147,7 +171,9 @@
     .mini-badge,
     .qc-badge,
     .posture-badge,
-    .rank-badge {
+    .rank-badge,
+    .system-badge,
+    .refresh-indicator {
       display: inline-flex;
       align-items: center;
       gap: 0.55rem;
@@ -165,6 +191,57 @@
       background: var(--yellow-soft);
       color: #ffe7a3;
       border: 1px solid rgba(251, 191, 36, 0.24);
+    }
+
+    .system-badge,
+    .refresh-indicator {
+      padding: 0.55rem 0.8rem;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: #dbe7ff;
+      font-size: 0.76rem;
+    }
+
+    .system-badge.warning {
+      color: #ffe7a3;
+      border-color: rgba(251, 191, 36, 0.24);
+      background: var(--yellow-soft);
+    }
+
+    .system-badge.success {
+      color: #b8ffe7;
+      border-color: rgba(52, 211, 153, 0.2);
+      background: var(--green-soft);
+    }
+
+    .system-badge.hidden {
+      display: none;
+    }
+
+    .refresh-button {
+      appearance: none;
+      border: 1px solid rgba(125, 211, 252, 0.18);
+      background: rgba(125, 211, 252, 0.08);
+      color: #d9f4ff;
+      border-radius: 999px;
+      padding: 0.72rem 1rem;
+      font: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, opacity 180ms ease;
+    }
+
+    .refresh-button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      border-color: rgba(125, 211, 252, 0.3);
+      background: rgba(125, 211, 252, 0.12);
+    }
+
+    .refresh-button:disabled {
+      opacity: 0.72;
+      cursor: wait;
     }
 
     .status-badge::before,
@@ -200,6 +277,7 @@
 
     .hero-panel strong {
       font-size: 1.05rem;
+      word-break: break-word;
     }
 
     .section {
@@ -285,7 +363,7 @@
     .progress-bar span {
       display: block;
       height: 100%;
-      width: 70%;
+      width: var(--progress, 0%);
       border-radius: inherit;
       background: linear-gradient(90deg, #2dd4bf 0%, #38bdf8 45%, #8b5cf6 100%);
       box-shadow: 0 0 24px rgba(56, 189, 248, 0.35);
@@ -371,6 +449,7 @@
     .status-dot.active::before { background: var(--green); animation: pulse 2s infinite; }
     .status-dot.warning::before { background: var(--yellow); box-shadow: 0 0 14px rgba(251, 191, 36, 0.48); }
     .status-dot.down::before { background: var(--red); box-shadow: 0 0 14px rgba(251, 113, 133, 0.45); }
+    .status-dot.configured::before { background: var(--blue); box-shadow: 0 0 14px rgba(125, 211, 252, 0.38); }
 
     .model-list {
       display: grid;
@@ -417,6 +496,11 @@
     .mini-badge.active { color: #b8ffe7; background: var(--green-soft); border-color: rgba(52, 211, 153, 0.18); }
     .mini-badge.warning { color: #ffe9ad; background: var(--yellow-soft); border-color: rgba(251, 191, 36, 0.18); }
     .mini-badge.down { color: #ffc0cb; background: var(--red-soft); border-color: rgba(251, 113, 133, 0.16); }
+    .mini-badge.configured { color: #d2f1ff; background: rgba(125, 211, 252, 0.12); border-color: rgba(125, 211, 252, 0.18); }
+
+    .provider-note {
+      margin-top: 0.55rem;
+    }
 
     .dept-card { display: grid; gap: 0.9rem; }
 
@@ -477,7 +561,6 @@
       min-height: 164px;
     }
 
-    .market-grid { counter-reset: rank; }
     .market-card {
       display: grid;
       gap: 0.65rem;
@@ -501,8 +584,18 @@
     .rank-track span {
       display: block;
       height: 100%;
+      width: var(--rank-width, 0%);
       border-radius: inherit;
       background: linear-gradient(90deg, rgba(56, 189, 248, 0.95), rgba(139, 92, 246, 0.92));
+    }
+
+    .empty-state,
+    .loading-state {
+      padding: 1rem;
+      border: 1px dashed rgba(148, 163, 184, 0.2);
+      border-radius: 18px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.02);
     }
 
     footer {
@@ -544,7 +637,7 @@
 
     @keyframes loadIn {
       from { width: 0; opacity: 0.6; }
-      to { width: 70%; opacity: 1; }
+      to { width: var(--progress, 100%); opacity: 1; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -557,26 +650,32 @@
   </style>
 </head>
 <body>
-  <main class="shell">
+  <main class="shell" id="app">
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow">Live org telemetry</div>
-          <div>
-            <h1>VEELA AI ORG</h1>
-            <div class="status-badge">Overall status: AMBER · Stable with targeted corrections</div>
+          <div class="hero-toolbar">
+            <div class="hero-topline">
+              <div class="eyebrow" id="eyebrow">Live org telemetry</div>
+              <div class="live-badge">LIVE</div>
+            </div>
+            <button class="refresh-button" id="refreshButton" type="button" aria-label="Refresh dashboard data">Refresh</button>
           </div>
-          <p>The CEO control panel for provider health, department output quality, launch readiness, and market execution. Everything visible at a glance, tuned for fast decisions on mobile and desktop.</p>
+
+          <div>
+            <h1 id="orgName">Loading dashboard…</h1>
+            <div class="status-badge" id="overallStatus">Syncing data</div>
+          </div>
+
+          <p id="tagline">Fetching live org state, provider health, department posture, launch readiness, and market priorities.</p>
+
+          <div class="refresh-meta">
+            <div class="refresh-indicator" id="lastRefreshed">Last refreshed: waiting for first sync</div>
+            <div class="system-badge hidden" id="dataMessage" role="status" aria-live="polite"></div>
+          </div>
         </div>
 
-        <div class="hero-panel">
-          <span class="hero-panel-label">Operating mode</span>
-          <strong>Department + QC + correction waves</strong>
-          <span class="hero-panel-label">Primary runtime</span>
-          <strong>anthropic/claude-opus-4-6</strong>
-          <span class="hero-panel-label">QC posture</span>
-          <strong>Enabled across active departments</strong>
-        </div>
+        <div class="hero-panel" id="heroPanel"></div>
       </div>
     </section>
 
@@ -587,32 +686,7 @@
           <p class="section-subtitle">The numbers that matter right now.</p>
         </div>
       </div>
-
-      <div class="metrics">
-        <article class="metric">
-          <div class="metric-label">Providers</div>
-          <div class="metric-value">5</div>
-          <div class="metric-note">Multi-provider stack active across core operations.</div>
-        </article>
-        <article class="metric">
-          <div class="metric-label">Configured models</div>
-          <div class="metric-value">9</div>
-          <div class="metric-note">Primary, QC, multimodal, and low-cost support lanes.</div>
-        </article>
-        <article class="metric">
-          <div class="metric-label">Files across org</div>
-          <div class="metric-value">146</div>
-          <div class="metric-note">Operational artifacts, trackers, templates, and reports.</div>
-        </article>
-        <article class="metric">
-          <div class="metric-label">Wave progress</div>
-          <div class="progress-wrap">
-            <div class="metric-value">7/10</div>
-            <div class="progress-bar"><span></span></div>
-            <div class="progress-meta"><span>7 waves completed</span><span>70%</span></div>
-          </div>
-        </article>
-      </div>
+      <div class="metrics" id="metrics"></div>
     </section>
 
     <section class="section card">
@@ -622,98 +696,7 @@
           <p class="section-subtitle">Green = active, yellow = warning, red = down.</p>
         </div>
       </div>
-
-      <div class="provider-grid">
-        <article class="provider-card">
-          <div class="provider-top">
-            <div class="provider-name">Anthropic</div>
-            <div class="status-dot active">Active</div>
-          </div>
-          <ul class="model-list">
-            <li class="model-item">
-              <strong>anthropic/claude-opus-4-6</strong>
-              <span>CEO / main coordinator</span>
-              <div class="mini-badge active">runtime-confirmed</div>
-            </li>
-            <li class="model-item">
-              <strong>anthropic/claude-sonnet-4-6</strong>
-              <span>CMO primary / QC / subagents</span>
-              <div class="mini-badge active">runtime-confirmed</div>
-            </li>
-          </ul>
-        </article>
-
-        <article class="provider-card">
-          <div class="provider-top">
-            <div class="provider-name">OpenAI OAuth</div>
-            <div class="status-dot active">Active</div>
-          </div>
-          <ul class="model-list">
-            <li class="model-item">
-              <strong>openai-codex/gpt-5.4</strong>
-              <span>CSO / CDO / OPS primary</span>
-              <div class="mini-badge active">auth-confirmed</div>
-            </li>
-          </ul>
-        </article>
-
-        <article class="provider-card">
-          <div class="provider-top">
-            <div class="provider-name">xAI</div>
-            <div class="status-dot warning">Warning</div>
-          </div>
-          <ul class="model-list">
-            <li class="model-item">
-              <strong>xai/grok-3</strong>
-              <span>INTEL primary</span>
-              <div class="mini-badge warning">api-tested · correction wave active</div>
-            </li>
-            <li class="model-item">
-              <strong>xai/grok-4</strong>
-              <span>Available reserve lane</span>
-              <div class="mini-badge active">configured</div>
-            </li>
-          </ul>
-        </article>
-
-        <article class="provider-card">
-          <div class="provider-top">
-            <div class="provider-name">Google</div>
-            <div class="status-dot active">Active</div>
-          </div>
-          <ul class="model-list">
-            <li class="model-item">
-              <strong>google/gemini-2.5-flash</strong>
-              <span>OPS QC / fast multimodal</span>
-              <div class="mini-badge active">api-tested</div>
-            </li>
-            <li class="model-item">
-              <strong>google/gemini-2.5-pro</strong>
-              <span>CDO / INTEL multimodal</span>
-              <div class="mini-badge active">configured</div>
-            </li>
-          </ul>
-        </article>
-
-        <article class="provider-card">
-          <div class="provider-top">
-            <div class="provider-name">OpenRouter</div>
-            <div class="status-dot active">Active</div>
-          </div>
-          <ul class="model-list">
-            <li class="model-item">
-              <strong>mistralai/mistral-nemo</strong>
-              <span>Grunt work / formatting</span>
-              <div class="mini-badge active">api-tested</div>
-            </li>
-            <li class="model-item">
-              <strong>nvidia/nemotron-nano-9b-v2</strong>
-              <span>Tables / structured data</span>
-              <div class="mini-badge warning">configured</div>
-            </li>
-          </ul>
-        </article>
-      </div>
+      <div class="provider-grid" id="providers"></div>
     </section>
 
     <section class="section card">
@@ -723,122 +706,7 @@
           <p class="section-subtitle">Primary model, QC model, delivery status, latest output, and pass/fail posture.</p>
         </div>
       </div>
-
-      <div class="department-grid">
-        <article class="dept-card">
-          <div class="dept-top">
-            <div class="dept-name">CEO</div>
-            <div class="status-dot active">Live</div>
-          </div>
-          <div class="dept-stack">
-            <div class="stack-item">
-              <div class="stack-label">Primary model</div>
-              <strong>anthropic/claude-opus-4-6</strong>
-            </div>
-            <div class="stack-item">
-              <div class="stack-label">QC model</div>
-              <strong>self-review</strong>
-            </div>
-          </div>
-          <div class="qc-badge passed">QC Passed</div>
-          <p class="dept-output">Roadmap governance, coordination, and QC orchestration running cleanly.</p>
-        </article>
-
-        <article class="dept-card">
-          <div class="dept-top">
-            <div class="dept-name">CMO</div>
-            <div class="status-dot warning">Warning</div>
-          </div>
-          <div class="dept-stack">
-            <div class="stack-item">
-              <div class="stack-label">Primary model</div>
-              <strong>anthropic/claude-sonnet-4-6</strong>
-            </div>
-            <div class="stack-item">
-              <div class="stack-label">QC model</div>
-              <strong>openai-codex/gpt-5.4</strong>
-            </div>
-          </div>
-          <div class="qc-badge warning">QC Warning</div>
-          <p class="dept-output">Brand guidelines, content calendar, competitor brands, and social tracker are operational, with minor evidence-phrasing cleanup remaining.</p>
-        </article>
-
-        <article class="dept-card">
-          <div class="dept-top">
-            <div class="dept-name">CSO</div>
-            <div class="status-dot active">Operational</div>
-          </div>
-          <div class="dept-stack">
-            <div class="stack-item">
-              <div class="stack-label">Primary model</div>
-              <strong>openai-codex/gpt-5.4</strong>
-            </div>
-            <div class="stack-item">
-              <div class="stack-label">QC model</div>
-              <strong>anthropic/claude-sonnet-4-6</strong>
-            </div>
-          </div>
-          <div class="qc-badge passed">QC Passed</div>
-          <p class="dept-output">Distributor DB, pricing intelligence, marketplace tracker, and trade show stack passed re-QC.</p>
-        </article>
-
-        <article class="dept-card">
-          <div class="dept-top">
-            <div class="dept-name">CDO</div>
-            <div class="status-dot warning">Warning</div>
-          </div>
-          <div class="dept-stack">
-            <div class="stack-item">
-              <div class="stack-label">Primary model</div>
-              <strong>openai-codex/gpt-5.4</strong>
-            </div>
-            <div class="stack-item">
-              <div class="stack-label">QC model</div>
-              <strong>google/gemini-2.5-flash</strong>
-            </div>
-          </div>
-          <div class="qc-badge warning">QC Warning</div>
-          <p class="dept-output">Asset library, visual rules, design queue, and template registry are usable, with explicit regional review locks still to document.</p>
-        </article>
-
-        <article class="dept-card">
-          <div class="dept-top">
-            <div class="dept-name">INTEL</div>
-            <div class="status-dot down">Correction active</div>
-          </div>
-          <div class="dept-stack">
-            <div class="stack-item">
-              <div class="stack-label">Primary model</div>
-              <strong>xai/grok-3</strong>
-            </div>
-            <div class="stack-item">
-              <div class="stack-label">QC model</div>
-              <strong>anthropic/claude-opus-4-6</strong>
-            </div>
-          </div>
-          <div class="qc-badge failed">QC Failed</div>
-          <p class="dept-output">Competitor watch and tariff map improved, but market signals and regulatory tracker still fail evidence discipline.</p>
-        </article>
-
-        <article class="dept-card">
-          <div class="dept-top">
-            <div class="dept-name">OPS</div>
-            <div class="status-dot active">Operational</div>
-          </div>
-          <div class="dept-stack">
-            <div class="stack-item">
-              <div class="stack-label">Primary model</div>
-              <strong>openai-codex/gpt-5.4</strong>
-            </div>
-            <div class="stack-item">
-              <div class="stack-label">QC model</div>
-              <strong>anthropic/claude-sonnet-4-6</strong>
-            </div>
-          </div>
-          <div class="qc-badge passed">QC Passed</div>
-          <p class="dept-output">Agent health, daily report, weekly report, regulatory status, and QC system are stable.</p>
-        </article>
-      </div>
+      <div class="department-grid" id="departments"></div>
     </section>
 
     <section class="section bottom-grid">
@@ -849,33 +717,7 @@
             <p class="section-subtitle">Red / amber / green view across critical launch vectors.</p>
           </div>
         </div>
-        <div class="launch-grid">
-          <article class="posture-card">
-            <div class="posture-name">OEM</div>
-            <div class="posture-badge green">GREEN</div>
-            <p class="posture-note">Partner narrative and technical posture aligned.</p>
-          </article>
-          <article class="posture-card">
-            <div class="posture-name">Regulatory</div>
-            <div class="posture-badge amber">AMBER</div>
-            <p class="posture-note">Country-specific evidence discipline still tightening.</p>
-          </article>
-          <article class="posture-card">
-            <div class="posture-name">Capital</div>
-            <div class="posture-badge green">GREEN</div>
-            <p class="posture-note">Funding story, controls, and planning stack ready.</p>
-          </article>
-          <article class="posture-card">
-            <div class="posture-name">Packaging</div>
-            <div class="posture-badge amber">AMBER</div>
-            <p class="posture-note">Regional review locks need explicit documentation.</p>
-          </article>
-          <article class="posture-card">
-            <div class="posture-name">Commercial</div>
-            <div class="posture-badge green">GREEN</div>
-            <p class="posture-note">Go-to-market assets and channel intelligence are usable.</p>
-          </article>
-        </div>
+        <div class="launch-grid" id="launchPosture"></div>
       </article>
 
       <article class="card">
@@ -885,55 +727,342 @@
             <p class="section-subtitle">Ranked launch focus across the current strategic map.</p>
           </div>
         </div>
-        <div class="market-grid">
-          <article class="market-card">
-            <div class="market-top">
-              <div class="market-name">MY</div>
-              <div class="rank-badge">#1</div>
-            </div>
-            <div class="rank-track"><span style="width: 100%"></span></div>
-            <p class="market-note">Launch-first</p>
-          </article>
-          <article class="market-card">
-            <div class="market-top">
-              <div class="market-name">UAE</div>
-              <div class="rank-badge">#2</div>
-            </div>
-            <div class="rank-track"><span style="width: 82%"></span></div>
-            <p class="market-note">High-value expansion</p>
-          </article>
-          <article class="market-card">
-            <div class="market-top">
-              <div class="market-name">Saudi</div>
-              <div class="rank-badge">#3</div>
-            </div>
-            <div class="rank-track"><span style="width: 66%"></span></div>
-            <p class="market-note">Strategic scale</p>
-          </article>
-          <article class="market-card">
-            <div class="market-top">
-              <div class="market-name">US</div>
-              <div class="rank-badge">#4</div>
-            </div>
-            <div class="rank-track"><span style="width: 48%"></span></div>
-            <p class="market-note">Signal-building</p>
-          </article>
-          <article class="market-card">
-            <div class="market-top">
-              <div class="market-name">Indonesia</div>
-              <div class="rank-badge">#5</div>
-            </div>
-            <div class="rank-track"><span style="width: 34%"></span></div>
-            <p class="market-note">Pipeline development</p>
-          </article>
-        </div>
+        <div class="market-grid" id="marketPriority"></div>
       </article>
     </section>
 
     <footer>
-      <p>Last updated: 2026-04-03 01:48 UTC</p>
-      <p>Powered by Veela 🐾</p>
+      <p id="footerUpdated">Last updated: —</p>
+      <p id="footerPowered">Powered by —</p>
     </footer>
   </main>
+
+  <script>
+    (() => {
+      const DATA_URL = 'model-dashboard.json';
+      const CACHE_KEY = 'veela-model-dashboard-cache';
+      const REFRESH_MS = 60000;
+
+      const els = {
+        orgName: document.getElementById('orgName'),
+        overallStatus: document.getElementById('overallStatus'),
+        tagline: document.getElementById('tagline'),
+        heroPanel: document.getElementById('heroPanel'),
+        metrics: document.getElementById('metrics'),
+        providers: document.getElementById('providers'),
+        departments: document.getElementById('departments'),
+        launchPosture: document.getElementById('launchPosture'),
+        marketPriority: document.getElementById('marketPriority'),
+        footerUpdated: document.getElementById('footerUpdated'),
+        footerPowered: document.getElementById('footerPowered'),
+        lastRefreshed: document.getElementById('lastRefreshed'),
+        dataMessage: document.getElementById('dataMessage'),
+        refreshButton: document.getElementById('refreshButton')
+      };
+
+      let lastData = null;
+      let lastRenderedAt = null;
+      let refreshTimer = null;
+
+      const escapeHtml = (value) => String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+
+      const formatTime = (value) => {
+        if (!value) return '—';
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return String(value);
+        return new Intl.DateTimeFormat(undefined, {
+          year: 'numeric',
+          month: 'short',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        }).format(date);
+      };
+
+      const setMessage = (text, tone = '') => {
+        if (!text) {
+          els.dataMessage.textContent = '';
+          els.dataMessage.className = 'system-badge hidden';
+          return;
+        }
+        els.dataMessage.textContent = text;
+        els.dataMessage.className = `system-badge ${tone}`.trim();
+      };
+
+      const getCache = () => {
+        try {
+          const raw = localStorage.getItem(CACHE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch {
+          return null;
+        }
+      };
+
+      const setCache = (data) => {
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify({
+            cachedAt: new Date().toISOString(),
+            data
+          }));
+        } catch {
+          // Ignore storage failures silently.
+        }
+      };
+
+      const metricCard = (label, value, note) => `
+        <article class="metric">
+          <div class="metric-label">${escapeHtml(label)}</div>
+          <div class="metric-value">${escapeHtml(value)}</div>
+          <div class="metric-note">${escapeHtml(note)}</div>
+        </article>
+      `;
+
+      const progressMetric = (completed, total) => {
+        const safeCompleted = Number(completed) || 0;
+        const safeTotal = Number(total) || 0;
+        const percent = safeTotal > 0 ? Math.max(0, Math.min(100, Math.round((safeCompleted / safeTotal) * 100))) : 0;
+        return `
+          <article class="metric">
+            <div class="metric-label">Wave progress</div>
+            <div class="progress-wrap">
+              <div class="metric-value">${escapeHtml(`${safeCompleted}/${safeTotal || 0}`)}</div>
+              <div class="progress-bar" style="--progress:${percent}%"><span></span></div>
+              <div class="progress-meta"><span>${escapeHtml(`${safeCompleted} waves completed`)}</span><span>${escapeHtml(`${percent}%`)}</span></div>
+            </div>
+          </article>
+        `;
+      };
+
+      const statusClass = (status) => {
+        const normalized = String(status || '').toLowerCase();
+        if (normalized === 'passed' || normalized === 'green') return 'passed';
+        if (normalized === 'warning' || normalized === 'amber' || normalized === 'yellow') return 'warning';
+        if (normalized === 'failed' || normalized === 'red') return 'failed';
+        return normalized || 'configured';
+      };
+
+      const indicatorClass = (status) => {
+        const normalized = String(status || '').toLowerCase();
+        if (['active', 'live', 'operational'].includes(normalized)) return 'active';
+        if (['warning', 'needs phrasing cleanup', 'minor registry cleanup'].includes(normalized)) return 'warning';
+        if (['down', 'failed'].includes(normalized)) return 'down';
+        if (normalized === 'configured') return 'configured';
+        return normalized || 'configured';
+      };
+
+      const renderHeroPanel = (data) => {
+        const liveMode = data?.org?.liveMode ?? '—';
+        const runtimePrimary = data?.summary?.runtimePrimary ?? '—';
+        const qcEnabled = data?.summary?.qcEnabled ? 'Enabled across active departments' : 'Disabled';
+        return `
+          <span class="hero-panel-label">Operating mode</span>
+          <strong>${escapeHtml(liveMode)}</strong>
+          <span class="hero-panel-label">Primary runtime</span>
+          <strong>${escapeHtml(runtimePrimary)}</strong>
+          <span class="hero-panel-label">QC posture</span>
+          <strong>${escapeHtml(qcEnabled)}</strong>
+        `;
+      };
+
+      const renderMetrics = (data) => {
+        const files = data?.org?.files ?? 0;
+        const providers = data?.summary?.providers ?? (data?.providers?.length ?? 0);
+        const configuredModels = data?.summary?.configuredModels ?? 0;
+        const roadmapSystem = data?.summary?.roadmapSystem ? 'Roadmap governance system active.' : 'Roadmap system not flagged.';
+        const qcEnabled = data?.summary?.qcEnabled ? 'QC active across the org.' : 'QC not enabled.';
+
+        return [
+          metricCard('Providers', providers, 'Multi-provider stack active across core operations.'),
+          metricCard('Configured models', configuredModels, `${escapeHtml(qcEnabled)}`),
+          metricCard('Files across org', files, `${escapeHtml(roadmapSystem)}`),
+          progressMetric(data?.org?.wavesCompleted, data?.org?.totalWaves)
+        ].join('');
+      };
+
+      const renderProviders = (providers) => {
+        if (!Array.isArray(providers) || providers.length === 0) {
+          return '<div class="empty-state">No provider data available.</div>';
+        }
+
+        return providers.map((provider) => `
+          <article class="provider-card">
+            <div class="provider-top">
+              <div class="provider-name">${escapeHtml(provider.name)}</div>
+              <div class="status-dot ${escapeHtml(indicatorClass(provider.status))}">${escapeHtml(provider.statusLabel || provider.status || 'Unknown')}</div>
+            </div>
+            <ul class="model-list">
+              ${(provider.models || []).map((model) => `
+                <li class="model-item">
+                  <strong>${escapeHtml(model.id)}</strong>
+                  <span>${escapeHtml(model.role)}</span>
+                  <div class="mini-badge ${escapeHtml(indicatorClass(model.status || model.testStatus))}">${escapeHtml(model.testStatus || model.status || 'configured')}</div>
+                  <p class="provider-note">${escapeHtml(model.latestOutput || '')}</p>
+                </li>
+              `).join('')}
+            </ul>
+          </article>
+        `).join('');
+      };
+
+      const renderDepartments = (departments) => {
+        if (!Array.isArray(departments) || departments.length === 0) {
+          return '<div class="empty-state">No department data available.</div>';
+        }
+
+        return departments.map((dept) => `
+          <article class="dept-card">
+            <div class="dept-top">
+              <div class="dept-name">${escapeHtml(dept.department)}</div>
+              <div class="status-dot ${escapeHtml(indicatorClass(dept.status))}">${escapeHtml(dept.statusLabel || dept.status || 'Unknown')}</div>
+            </div>
+            <div class="dept-stack">
+              <div class="stack-item">
+                <div class="stack-label">Primary model</div>
+                <strong>${escapeHtml(dept.primaryModel)}</strong>
+              </div>
+              <div class="stack-item">
+                <div class="stack-label">QC model</div>
+                <strong>${escapeHtml(dept.qcModel)}</strong>
+              </div>
+            </div>
+            <div class="qc-badge ${escapeHtml(statusClass(dept.qcStatus))}">${escapeHtml(dept.qcLabel || dept.qcStatus || 'QC Unknown')}</div>
+            <p class="dept-output">${escapeHtml(dept.latestOutput || '')}</p>
+          </article>
+        `).join('');
+      };
+
+      const renderLaunchPosture = (items) => {
+        if (!Array.isArray(items) || items.length === 0) {
+          return '<div class="empty-state">No launch posture data available.</div>';
+        }
+
+        return items.map((item) => `
+          <article class="posture-card">
+            <div class="posture-name">${escapeHtml(item.name)}</div>
+            <div class="posture-badge ${escapeHtml(statusClass(item.status))}">${escapeHtml(item.label || item.status || 'Unknown')}</div>
+            <p class="posture-note">${escapeHtml(item.note || '')}</p>
+          </article>
+        `).join('');
+      };
+
+      const renderMarketPriority = (items) => {
+        if (!Array.isArray(items) || items.length === 0) {
+          return '<div class="empty-state">No market priority data available.</div>';
+        }
+
+        const maxRank = Math.max(...items.map((item) => Number(item.rank) || 0), 1);
+
+        return items.map((item) => {
+          const rank = Number(item.rank) || 0;
+          const width = Math.max(18, Math.round(((maxRank - rank + 1) / maxRank) * 100));
+          return `
+            <article class="market-card">
+              <div class="market-top">
+                <div class="market-name">${escapeHtml(item.market)}</div>
+                <div class="rank-badge">#${escapeHtml(rank || '—')}</div>
+              </div>
+              <div class="rank-track" style="--rank-width:${width}%"><span></span></div>
+              <p class="market-note">${escapeHtml(item.focus || '')}</p>
+            </article>
+          `;
+        }).join('');
+      };
+
+      const applyOverallStatus = (org) => {
+        const tone = String(org?.overallStatus || '').toLowerCase();
+        const classMap = { green: 'green', amber: 'amber', yellow: 'amber', red: 'red' };
+        els.overallStatus.className = `status-badge ${classMap[tone] || ''}`.trim();
+        els.overallStatus.textContent = `Overall status: ${org?.overallStatus || 'Unknown'} · ${org?.overallStatusLabel || 'Awaiting detail'}`;
+      };
+
+      const render = (data, source = 'live') => {
+        lastData = data;
+        lastRenderedAt = new Date();
+
+        const org = data?.org || {};
+        const summary = data?.summary || {};
+        const footer = data?.footer || {};
+
+        document.title = `${org.name || 'VEELA AI ORG'} — CEO Control Panel`;
+        els.orgName.textContent = org.name || 'Untitled dashboard';
+        els.tagline.textContent = org.tagline || 'No tagline available.';
+        applyOverallStatus(org);
+        els.heroPanel.innerHTML = renderHeroPanel(data);
+        els.metrics.innerHTML = renderMetrics(data);
+        els.providers.innerHTML = renderProviders(data?.providers);
+        els.departments.innerHTML = renderDepartments(data?.departments);
+        els.launchPosture.innerHTML = renderLaunchPosture(data?.launchPosture);
+        els.marketPriority.innerHTML = renderMarketPriority(data?.marketPriority);
+        els.footerUpdated.textContent = `Last updated: ${footer.lastUpdatedLabel || org.updatedAt || data.updatedAt || '—'}`;
+        els.footerPowered.textContent = footer.poweredBy || 'Powered by —';
+        els.lastRefreshed.textContent = `Last refreshed: ${formatTime(lastRenderedAt)}`;
+
+        if (source === 'cache') {
+          setMessage('Data unavailable — showing cached', 'warning');
+        } else if (source === 'live') {
+          setMessage('Live data synced', 'success');
+          window.setTimeout(() => {
+            if (els.dataMessage.textContent === 'Live data synced') setMessage('');
+          }, 3000);
+        }
+      };
+
+      const fetchDashboard = async ({ silent = false } = {}) => {
+        if (!silent) {
+          els.refreshButton.disabled = true;
+          els.refreshButton.textContent = 'Refreshing…';
+        }
+
+        try {
+          const response = await fetch(`${DATA_URL}?t=${Date.now()}`, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          setCache(data);
+          render(data, 'live');
+        } catch (error) {
+          const cached = getCache();
+          if (cached?.data) {
+            render(cached.data, 'cache');
+          } else if (!lastData) {
+            setMessage('Data unavailable', 'warning');
+            els.metrics.innerHTML = '<div class="loading-state">Unable to load dashboard data and no cache is available yet.</div>';
+            els.providers.innerHTML = '<div class="loading-state">Provider data unavailable.</div>';
+            els.departments.innerHTML = '<div class="loading-state">Department data unavailable.</div>';
+            els.launchPosture.innerHTML = '<div class="loading-state">Launch posture unavailable.</div>';
+            els.marketPriority.innerHTML = '<div class="loading-state">Market priority unavailable.</div>';
+            els.lastRefreshed.textContent = 'Last refreshed: fetch failed';
+          } else {
+            setMessage('Data unavailable — showing cached', 'warning');
+          }
+          console.error('Dashboard fetch failed:', error);
+        } finally {
+          els.refreshButton.disabled = false;
+          els.refreshButton.textContent = 'Refresh';
+        }
+      };
+
+      const boot = () => {
+        els.metrics.innerHTML = '<div class="loading-state">Loading executive snapshot…</div>';
+        els.providers.innerHTML = '<div class="loading-state">Loading provider status…</div>';
+        els.departments.innerHTML = '<div class="loading-state">Loading department command layer…</div>';
+        els.launchPosture.innerHTML = '<div class="loading-state">Loading launch posture…</div>';
+        els.marketPriority.innerHTML = '<div class="loading-state">Loading market priority…</div>';
+
+        els.refreshButton.addEventListener('click', () => fetchDashboard());
+        fetchDashboard();
+
+        if (refreshTimer) clearInterval(refreshTimer);
+        refreshTimer = setInterval(() => fetchDashboard({ silent: true }), REFRESH_MS);
+      };
+
+      boot();
+    })();
+  </script>
 </body>
 </html>
