@@ -1,0 +1,319 @@
+{
+  "_meta": {
+    "last_updated": "2026-04-03T15:42:00Z",
+    "updated_by": "OPS / PMO",
+    "version": "2.0",
+    "dashboard_focus": "Roadmap execution by week, month, year",
+    "canonical_sources": [
+      "ROADMAP.md",
+      "ops/launch-gates.md",
+      "ops/blockers-register.md",
+      "ops/red-to-green-plan.md",
+      "ops/first-launch-review-2026-W14.md",
+      "PROJECT_BOARD.md"
+    ]
+  },
+  "summary": {
+    "program": "Veela launch control",
+    "current_phase": "Phase 0 / Phase 1A transition",
+    "current_phase_label": "Operating baseline + OEM/regulatory clarification",
+    "overall_status": "red",
+    "overall_status_label": "Setup complete. Launch gates uncleared.",
+    "planning_horizon": "Apr 2026 to Feb 2027",
+    "review_cadence": "Weekly roadmap review + monthly rebaseline + annual horizon view"
+  },
+  "launch_gates": [
+    {
+      "id": "G1",
+      "name": "OEM validation",
+      "status": "red",
+      "owner": "OPS",
+      "turns_green_when": "At least one OEM has a complete audited cert pack and usable commercial path.",
+      "current_note": "OEM audit not complete; cert packs not yet collected."
+    },
+    {
+      "id": "G2",
+      "name": "Regulatory clarity",
+      "status": "red",
+      "owner": "OPS + INTEL",
+      "turns_green_when": "All 4 critical regulatory questions have proof-backed answers and execution notes.",
+      "current_note": "OQ-REG-01/02/03/04 remain open."
+    },
+    {
+      "id": "G3",
+      "name": "Working capital readiness",
+      "status": "red",
+      "owner": "CEO + OPS",
+      "turns_green_when": "Funding status is explicitly classified and first production is financially executable.",
+      "current_note": "$150k-$250k not yet confirmed; capital memo still needed."
+    },
+    {
+      "id": "G4",
+      "name": "Packaging lock",
+      "status": "amber",
+      "owner": "CMO + CDO + OPS",
+      "turns_green_when": "Fixed-field baseline locked; conditional fields tied to proof; blocked items isolated.",
+      "current_note": "Some structure can lock now, but VN + Arabic/regulatory-dependent fields remain unresolved."
+    }
+  ],
+  "top_blockers": [
+    {
+      "id": "BLK-01",
+      "title": "OEM cert packs not yet collected",
+      "owner": "OPS",
+      "urgency": "critical",
+      "impact": "Blocks OEM validation, production confidence, compliance confidence"
+    },
+    {
+      "id": "BLK-03",
+      "title": "Indonesia halal recognition unresolved (CICOT/BPJPH)",
+      "owner": "OPS + INTEL",
+      "urgency": "critical",
+      "impact": "Blocks halal strategy confidence and Indonesia planning"
+    },
+    {
+      "id": "BLK-05",
+      "title": "Vietnam sticker vs printed label unresolved",
+      "owner": "OPS",
+      "urgency": "critical",
+      "impact": "Blocks VN packaging lock and launch-timing realism"
+    },
+    {
+      "id": "BLK-06",
+      "title": "Saudi SABER / Ghad sequence unresolved",
+      "owner": "OPS + INTEL",
+      "urgency": "critical",
+      "impact": "Blocks Saudi compliance sequencing and lead-time model"
+    },
+    {
+      "id": "BLK-07",
+      "title": "Working capital source not yet confirmed",
+      "owner": "CEO + OPS",
+      "urgency": "critical",
+      "impact": "Blocks production deposits, launch timing, and commitment language"
+    }
+  ],
+  "roadmap": {
+    "current_view": "weekly",
+    "priority_themes": [
+      "OEM proof collection + audit",
+      "Resolve regulatory unknowns with source-backed answers",
+      "Build weekly operating cadence and gate review discipline",
+      "Lock packaging baseline without embedding unresolved assumptions",
+      "Pressure-test capital plan against first production window"
+    ],
+    "weekly": [
+      {
+        "id": "2026-W14",
+        "label": "W14 · Apr 3-5",
+        "status": "active",
+        "goal": "Stabilize operating control and surface hard blockers as explicit dashboard objects.",
+        "focus": [
+          "Canonical roadmap live and aligned to launch gates",
+          "Blockers register and red-to-green plan in force",
+          "Dashboard model updated to track week/month/year views"
+        ],
+        "exit_criteria": [
+          "Weekly roadmap view published",
+          "Owners and blockers visible",
+          "No hidden launch assumptions"
+        ]
+      },
+      {
+        "id": "2026-W15",
+        "label": "W15 · Apr 6-12",
+        "status": "next",
+        "goal": "Push RED gates toward AMBER.",
+        "focus": [
+          "Collect full cert packs from Bright Can + Petmeal",
+          "Run desk audit and issue Go/Warn/No-Go recommendation",
+          "Create first working-capital memo draft",
+          "Open named source path for all 4 regulatory questions"
+        ],
+        "exit_criteria": [
+          "OEM docs in hand",
+          "Regulatory source owners named",
+          "Capital memo draft exists"
+        ]
+      },
+      {
+        "id": "2026-W16",
+        "label": "W16 · Apr 13-19",
+        "status": "queued",
+        "goal": "Convert ambiguity into decision-ready notes.",
+        "focus": [
+          "Resolve OQ-REG-01 and OQ-REG-04 first",
+          "Classify funding as Funded / Partially funded / Unfunded",
+          "Publish BRD-002 fixed / conditional / blocked matrix"
+        ],
+        "exit_criteria": [
+          "Two highest-value regulatory questions materially advanced",
+          "Packaging structure split published",
+          "Capital posture explicitly classified"
+        ]
+      },
+      {
+        "id": "2026-W17",
+        "label": "W17 · Apr 20-26",
+        "status": "queued",
+        "goal": "Rebaseline launch assumptions based on proof.",
+        "focus": [
+          "Re-score first-market sequence VN/MY/US/UAE/Saudi",
+          "Decide whether Sep launch language remains defensible",
+          "Escalate any gate still lacking owner/date/proof path"
+        ],
+        "exit_criteria": [
+          "Launch timing language updated",
+          "Market order tied to actual gate status"
+        ]
+      }
+    ],
+    "monthly": [
+      {
+        "id": "2026-04",
+        "label": "Apr 2026",
+        "status": "active",
+        "objective": "Build operating baseline, OEM visibility, and decision discipline.",
+        "must_win": [
+          "Weekly roadmap review cadence live",
+          "OEM cert pack collection + audit underway",
+          "Regulatory source paths active for all 4 OQs",
+          "Working-capital memo v1 drafted"
+        ],
+        "gates_in_play": ["G1", "G2", "G3", "G4"]
+      },
+      {
+        "id": "2026-05",
+        "label": "May 2026",
+        "status": "upcoming",
+        "objective": "Resolve core regulatory ambiguity and lock packaging inputs.",
+        "must_win": [
+          "OQ-REG-01/02/03/04 materially resolved or escalated through experts",
+          "BRD-002 fixed / conditional / blocked matrix locked",
+          "FSVP/vendor discovery started",
+          "Channel launch order tightened against actual regulatory reality"
+        ],
+        "gates_in_play": ["G1", "G2", "G3", "G4"]
+      },
+      {
+        "id": "2026-06",
+        "label": "Jun 2026",
+        "status": "upcoming",
+        "objective": "Move from question-resolution into compliance-prep execution.",
+        "must_win": [
+          "Thailand DLD + free-sale path underway",
+          "US FSVP/FDA/AAFCO chain active",
+          "Saudi compliance path clarified enough for realistic sequencing",
+          "Funding posture supports first production planning"
+        ],
+        "gates_in_play": ["G2", "G3", "G4"]
+      },
+      {
+        "id": "2026-07-08",
+        "label": "Jul-Aug 2026",
+        "status": "upcoming",
+        "objective": "Create launch assets only after compliance path is real.",
+        "must_win": [
+          "Packaging variants produced for required markets",
+          "Photography + listing asset suite ready",
+          "Vietnam DAHP and labeling path clear enough for execution",
+          "Marketplace infrastructure build begins where gates allow"
+        ],
+        "gates_in_play": ["G2", "G4"]
+      },
+      {
+        "id": "2026-09",
+        "label": "Sep 2026 (tentative)",
+        "status": "conditional",
+        "objective": "First marketplace launch window if gates clear.",
+        "must_win": [
+          "Shopee VN/MY and Amazon US/UAE launch only where compliance base exists",
+          "Stores built and approved",
+          "Production run funded and scheduled"
+        ],
+        "gates_in_play": ["G1", "G2", "G3", "G4"]
+      }
+    ],
+    "yearly": [
+      {
+        "id": "2026",
+        "label": "2026",
+        "status": "active",
+        "objective": "De-risk Veela from operating setup into first real market entry.",
+        "chapters": [
+          "Q2: OEM + regulatory + capital truth-finding",
+          "Q3: Packaging, compliance prep, launch-asset build",
+          "Q3/Q4: First marketplaces live where evidence allows",
+          "Q4: Distributor prep follows proof, not hope"
+        ],
+        "success_definition": "At least one evidence-backed first-market launch path is operational without unresolved hard-gate assumptions."
+      },
+      {
+        "id": "2027",
+        "label": "2027 horizon",
+        "status": "planned",
+        "objective": "Convert first-market proof into scaled channel expansion.",
+        "chapters": [
+          "GCC distributor activation after Saudi/UAE compliance clearance",
+          "Additional SKUs / mirrored marketplaces",
+          "Profitability discipline and facility go/no-go logic"
+        ],
+        "success_definition": "Scale only after regulatory proof, packaging readiness, and channel economics are validated."
+      }
+    ]
+  },
+  "market_sequence": [
+    {
+      "market": "Malaysia",
+      "rank": 1,
+      "status": "lead hypothesis",
+      "why_now": "Relatively cleaner path and ASEAN proof-point candidate",
+      "main_gate": "Market registration path still needs formalization"
+    },
+    {
+      "market": "UAE",
+      "rank": 2,
+      "status": "lead hypothesis",
+      "why_now": "Commercially attractive but authority path still ambiguous",
+      "main_gate": "OQ-REG-02 unresolved"
+    },
+    {
+      "market": "Saudi Arabia",
+      "rank": 3,
+      "status": "warm, gated",
+      "why_now": "High-value GCC path and halal moat potential",
+      "main_gate": "SABER/Ghad/SFDA sequence unresolved"
+    },
+    {
+      "market": "US",
+      "rank": 4,
+      "status": "optionality",
+      "why_now": "Large upside if FSVP/FDA/AAFCO chain becomes workable",
+      "main_gate": "Compliance chain incomplete"
+    },
+    {
+      "market": "Indonesia",
+      "rank": 5,
+      "status": "blocked/delayed",
+      "why_now": "Important halal/ASEAN logic but currently too ambiguous",
+      "main_gate": "CICOT/BPJPH recognition unresolved"
+    }
+  ],
+  "activity": [
+    {
+      "time": "2026-04-03 15:42",
+      "agent": "OPS",
+      "msg": "Dashboard data model upgraded to roadmap views: weekly, monthly, yearly."
+    },
+    {
+      "time": "2026-04-03 15:35",
+      "agent": "OPS",
+      "msg": "Launch gates and blocker priorities aligned to canonical roadmap."
+    },
+    {
+      "time": "2026-04-02 22:00",
+      "agent": "CEO",
+      "msg": "Canonical roadmap, launch gates, blockers register, and red-to-green plan published."
+    }
+  ]
+}
