@@ -1,0 +1,201 @@
+{
+  "updatedAt": "2026-04-02T15:00:00Z",
+  "summary": {
+    "providers": 5,
+    "configuredModels": 8,
+    "runtimePrimary": "anthropic/claude-opus-4-6",
+    "qcEnabled": true,
+    "roadmapSystem": true
+  },
+  "providers": [
+    {
+      "name": "Anthropic",
+      "status": "active",
+      "models": [
+        {
+          "id": "anthropic/claude-opus-4-6",
+          "role": "CEO / main coordinator",
+          "status": "active",
+          "testStatus": "runtime-confirmed",
+          "latestOutput": "Current chat session is running on Claude Opus 4.6"
+        },
+        {
+          "id": "anthropic/claude-sonnet-4-6",
+          "role": "CMO primary / QC / subagents",
+          "status": "active",
+          "testStatus": "runtime-confirmed",
+          "latestOutput": "Used successfully for department builds, QC, and roadmap work"
+        }
+      ]
+    },
+    {
+      "name": "OpenAI OAuth",
+      "status": "active",
+      "models": [
+        {
+          "id": "openai-codex/gpt-5.4",
+          "role": "CSO / CDO / OPS primary",
+          "status": "active",
+          "testStatus": "auth-confirmed",
+          "latestOutput": "ChatGPT OAuth active and available to OpenClaw"
+        }
+      ]
+    },
+    {
+      "name": "xAI",
+      "status": "active",
+      "models": [
+        {
+          "id": "xai/grok-3",
+          "role": "INTEL primary",
+          "status": "active",
+          "testStatus": "api-tested",
+          "latestOutput": "xAI OK"
+        },
+        {
+          "id": "xai/grok-4",
+          "role": "available",
+          "status": "active",
+          "testStatus": "available",
+          "latestOutput": "Configured and retained as non-default"
+        }
+      ]
+    },
+    {
+      "name": "Google",
+      "status": "active",
+      "models": [
+        {
+          "id": "google/gemini-2.5-flash",
+          "role": "OPS QC / fast multimodal",
+          "status": "active",
+          "testStatus": "api-tested",
+          "latestOutput": "Gemini OK"
+        },
+        {
+          "id": "google/gemini-2.5-pro",
+          "role": "CDO / INTEL multimodal",
+          "status": "active",
+          "testStatus": "configured",
+          "latestOutput": "Configured and previously tested successfully"
+        }
+      ]
+    },
+    {
+      "name": "OpenRouter",
+      "status": "active",
+      "models": [
+        {
+          "id": "mistralai/mistral-nemo",
+          "role": "grunt work / formatting",
+          "status": "active",
+          "testStatus": "api-tested",
+          "latestOutput": "OpenRouter OK"
+        },
+        {
+          "id": "nvidia/nemotron-nano-9b-v2",
+          "role": "tables / structured data",
+          "status": "configured",
+          "testStatus": "configured",
+          "latestOutput": "Configured for cheap structured work"
+        }
+      ]
+    }
+  ],
+  "departments": [
+    {
+      "department": "CEO",
+      "primaryModel": "anthropic/claude-opus-4-6",
+      "qcModel": "self-review",
+      "status": "active",
+      "qcStatus": "operational",
+      "latestOutput": "Roadmap governance, coordination, QC orchestration",
+      "latestIssues": []
+    },
+    {
+      "department": "CMO",
+      "primaryModel": "anthropic/claude-sonnet-4-6",
+      "qcModel": "openai-codex/gpt-5.4",
+      "status": "produced; mostly passed with non-blocking warnings",
+      "qcStatus": "warning",
+      "latestOutput": "Brand guidelines, content calendar, competitor brands, social tracker",
+      "latestIssues": [
+        "Competitor brands file still has a few claims phrased too confidently for the evidence standard."
+      ]
+    },
+    {
+      "department": "CSO",
+      "primaryModel": "openai-codex/gpt-5.4",
+      "qcModel": "anthropic/claude-sonnet-4-6",
+      "status": "produced; QC passed",
+      "qcStatus": "passed",
+      "latestOutput": "Distributor DB, pricing intelligence, marketplace tracker, trade shows",
+      "latestIssues": []
+    },
+    {
+      "department": "CDO",
+      "primaryModel": "openai-codex/gpt-5.4",
+      "qcModel": "google/gemini-2.5-flash",
+      "status": "produced; mostly passed with non-blocking warnings",
+      "qcStatus": "warning",
+      "latestOutput": "Asset library, visual rules, design queue, template registry",
+      "latestIssues": [
+        "Template registry should add explicit AR/VN native/local review lock notes.",
+        "CDO_SYSTEM model assignment still conflicts with ops/QC_SYSTEM.md."
+      ]
+    },
+    {
+      "department": "INTEL",
+      "primaryModel": "xai/grok-3",
+      "qcModel": "anthropic/claude-opus-4-6",
+      "status": "produced; still under correction",
+      "qcStatus": "failed / correction",
+      "latestOutput": "Competitor watch, market signals, regulatory tracker, tariff map",
+      "latestIssues": [
+        "Market signals still fails evidence-discipline checks for live market claims.",
+        "Regulatory tracker still fails due to assumed statuses and mixed requirement/estimate/action sections.",
+        "Competitor watch and tariff map improved but still carry warning-level sourcing gaps."
+      ]
+    },
+    {
+      "department": "OPS",
+      "primaryModel": "openai-codex/gpt-5.4",
+      "qcModel": "anthropic/claude-sonnet-4-6",
+      "status": "produced; QC passed",
+      "qcStatus": "passed",
+      "latestOutput": "Agent health, daily report, weekly report, regulatory status, QC system",
+      "latestIssues": []
+    }
+  ],
+  "qcStatus": {
+    "summary": {
+      "ops": "QC PASSED",
+      "cso": "QC PASSED",
+      "cmo": "Mostly passed with non-blocking warnings",
+      "cdo": "Mostly passed with non-blocking warnings",
+      "intel": "Still under correction"
+    },
+    "latestOutputsIssues": {
+      "opsCso": [
+        "OPS and CSO re-QC passed with no prior blockers remaining open."
+      ],
+      "cmoCdo": [
+        "Most files now pass and are operationally usable.",
+        "Remaining non-blocking fixes: soften a few competitor claims, add explicit AR/VN review locks, reconcile CDO system model assignment."
+      ],
+      "intel": [
+        "Competitor watch and tariff map improved to warning level.",
+        "Market signals and regulatory tracker remain failed and need more evidence-tight correction.",
+        "Company brief remains usable internally but still warning-level on sourcing discipline."
+      ]
+    }
+  },
+  "currentWork": {
+    "roadmap": "created",
+    "qcPhase": "active",
+    "fixesInProgress": [
+      "INTEL corrections",
+      "CMO + CDO warning cleanup"
+    ]
+  }
+}

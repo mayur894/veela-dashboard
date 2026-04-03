@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Veela Model Dashboard</title>
+  <style>
+    body { font-family: Inter, Arial, sans-serif; background:#0f172a; color:#e2e8f0; margin:0; padding:24px; }
+    .wrap { max-width:1200px; margin:0 auto; }
+    h1,h2 { margin:0 0 12px; }
+    h3 { margin:0 0 8px; font-size:16px; }
+    .muted { color:#94a3b8; }
+    .grid { display:grid; gap:16px; }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card { background:#111827; border:1px solid #1f2937; border-radius:16px; padding:16px; }
+    .pill { display:inline-block; padding:4px 10px; border-radius:999px; font-size:12px; margin-right:8px; }
+    .ok { background:#064e3b; color:#a7f3d0; }
+    .warn { background:#78350f; color:#fde68a; }
+    .bad { background:#7f1d1d; color:#fecaca; }
+    .info { background:#1e3a8a; color:#bfdbfe; }
+    table { width:100%; border-collapse: collapse; margin-top:8px; }
+    th, td { text-align:left; padding:10px 8px; border-bottom:1px solid #1f2937; vertical-align:top; }
+    th { color:#93c5fd; font-weight:600; }
+    code { color:#93c5fd; }
+    ul { margin:8px 0 0 18px; padding:0; }
+    li { margin:4px 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Veela Model Dashboard</h1>
+    <p class="muted">Live-ish control panel for providers, department model ownership, QC, and latest outputs.</p>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h2>System Summary</h2>
+        <p><span class="pill ok">Primary: Claude Opus 4.6</span><span class="pill info">QC Enabled</span><span class="pill info">Roadmap Live</span></p>
+        <ul>
+          <li>Providers: 5</li>
+          <li>Configured models: 8</li>
+          <li>Operating mode: department + QC + correction waves</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Current Work</h2>
+        <ul>
+          <li>Roadmap system: created</li>
+          <li>QC phase: active</li>
+          <li>Fixes in progress: INTEL corrections, CMO + CDO warning cleanup</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>QC Status</h2>
+      <div class="grid grid-3">
+        <div>
+          <h3>OPS</h3>
+          <p><span class="pill ok">QC PASSED</span></p>
+        </div>
+        <div>
+          <h3>CSO</h3>
+          <p><span class="pill ok">QC PASSED</span></p>
+        </div>
+        <div>
+          <h3>CMO</h3>
+          <p><span class="pill warn">Mostly passed + warnings</span></p>
+        </div>
+        <div>
+          <h3>CDO</h3>
+          <p><span class="pill warn">Mostly passed + warnings</span></p>
+        </div>
+        <div>
+          <h3>INTEL</h3>
+          <p><span class="pill bad">Under correction</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>Latest Outputs / Issues</h2>
+      <ul>
+        <li><strong>OPS + CSO:</strong> Re-QC passed. No previously flagged blockers remain open.</li>
+        <li><strong>CMO + CDO:</strong> Most files are now operationally usable. Remaining issues are non-blocking: a few competitor-claim phrasing cleanups, explicit AR/VN review locks in template registry, and a CDO system model-assignment mismatch.</li>
+        <li><strong>INTEL:</strong> Competitor watch and tariff map improved to warning level, but market signals and regulatory tracker still fail evidence-discipline checks and need more correction.</li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>Provider Status</h2>
+      <table>
+        <thead>
+          <tr><th>Provider</th><th>Model</th><th>Status</th><th>Role</th><th>Latest Output</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Anthropic</td><td><code>anthropic/claude-opus-4-6</code></td><td><span class="pill ok">runtime-confirmed</span></td><td>CEO / coordinator</td><td>Current chat session is running on Claude Opus 4.6</td></tr>
+          <tr><td>Anthropic</td><td><code>anthropic/claude-sonnet-4-6</code></td><td><span class="pill ok">runtime-confirmed</span></td><td>CMO primary / QC</td><td>Used successfully for departments, QC, and roadmap work</td></tr>
+          <tr><td>OpenAI OAuth</td><td><code>openai-codex/gpt-5.4</code></td><td><span class="pill ok">auth-confirmed</span></td><td>CSO / CDO / OPS primary</td><td>ChatGPT OAuth active</td></tr>
+          <tr><td>xAI</td><td><code>xai/grok-3</code></td><td><span class="pill ok">api-tested</span></td><td>INTEL primary</td><td>xAI OK</td></tr>
+          <tr><td>Google</td><td><code>google/gemini-2.5-flash</code></td><td><span class="pill ok">api-tested</span></td><td>Fast multimodal / QC</td><td>Gemini OK</td></tr>
+          <tr><td>OpenRouter</td><td><code>mistralai/mistral-nemo</code></td><td><span class="pill ok">api-tested</span></td><td>Cheap grunt work</td><td>OpenRouter OK</td></tr>
+          <tr><td>Google</td><td><code>google/gemini-2.5-pro</code></td><td><span class="pill info">configured</span></td><td>Deep multimodal</td><td>Configured and previously tested successfully</td></tr>
+          <tr><td>xAI</td><td><code>xai/grok-4</code></td><td><span class="pill info">configured</span></td><td>Available</td><td>Configured and retained as non-default</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>Department Status</h2>
+      <table>
+        <thead>
+          <tr><th>Department</th><th>Primary Model</th><th>QC Model</th><th>Status</th><th>Latest Output / Issues</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CEO</td><td><code>anthropic/claude-opus-4-6</code></td><td>self-review</td><td><span class="pill ok">active</span></td><td>Roadmap governance, coordination, QC orchestration</td></tr>
+          <tr><td>CMO</td><td><code>anthropic/claude-sonnet-4-6</code></td><td><code>openai-codex/gpt-5.4</code></td><td><span class="pill warn">mostly passed</span></td><td>Brand guidelines, content calendar, competitor brands, social tracker. Warning: a few competitor statements still need softer evidence phrasing.</td></tr>
+          <tr><td>CSO</td><td><code>openai-codex/gpt-5.4</code></td><td><code>anthropic/claude-sonnet-4-6</code></td><td><span class="pill ok">QC passed</span></td><td>Distributor DB, pricing intelligence, marketplace tracker, trade shows</td></tr>
+          <tr><td>CDO</td><td><code>openai-codex/gpt-5.4</code></td><td><code>google/gemini-2.5-flash</code></td><td><span class="pill warn">mostly passed</span></td><td>Asset library, visual rules, design queue, template registry. Warnings: explicit AR/VN review locks still needed; CDO system model assignment should be reconciled.</td></tr>
+          <tr><td>INTEL</td><td><code>xai/grok-3</code></td><td><code>anthropic/claude-opus-4-6</code></td><td><span class="pill bad">under correction</span></td><td>Competitor watch, market signals, regulatory tracker, tariff map. Fails remain in market signals and regulatory tracker; competitor watch and tariff map are improved but still warning-level.</td></tr>
+          <tr><td>OPS</td><td><code>openai-codex/gpt-5.4</code></td><td><code>anthropic/claude-sonnet-4-6</code></td><td><span class="pill ok">QC passed</span></td><td>Agent health, daily report, weekly report, regulatory status, QC system</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="muted" style="margin-top:16px;">Source files: <code>model-dashboard.json</code>, QC reports under <code>ops/</code>.</p>
+  </div>
+</body>
+</html>
