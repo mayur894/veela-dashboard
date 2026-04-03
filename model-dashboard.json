@@ -1,8 +1,18 @@
 {
-  "updatedAt": "2026-04-02T15:00:00Z",
+  "updatedAt": "2026-04-03T01:48:00Z",
+  "org": {
+    "name": "VEELA AI ORG",
+    "tagline": "CEO control panel for model operations, launch readiness, and market execution.",
+    "overallStatus": "AMBER",
+    "overallStatusLabel": "Stable with targeted corrections",
+    "files": 146,
+    "wavesCompleted": 7,
+    "totalWaves": 10,
+    "liveMode": "Department + QC + correction waves"
+  },
   "summary": {
     "providers": 5,
-    "configuredModels": 8,
+    "configuredModels": 9,
     "runtimePrimary": "anthropic/claude-opus-4-6",
     "qcEnabled": true,
     "roadmapSystem": true
@@ -11,13 +21,15 @@
     {
       "name": "Anthropic",
       "status": "active",
+      "statusLabel": "Active",
+      "accent": "green",
       "models": [
         {
           "id": "anthropic/claude-opus-4-6",
           "role": "CEO / main coordinator",
           "status": "active",
           "testStatus": "runtime-confirmed",
-          "latestOutput": "Current chat session is running on Claude Opus 4.6"
+          "latestOutput": "Current control session running on Claude Opus 4.6"
         },
         {
           "id": "anthropic/claude-sonnet-4-6",
@@ -31,6 +43,8 @@
     {
       "name": "OpenAI OAuth",
       "status": "active",
+      "statusLabel": "Active",
+      "accent": "green",
       "models": [
         {
           "id": "openai-codex/gpt-5.4",
@@ -43,20 +57,22 @@
     },
     {
       "name": "xAI",
-      "status": "active",
+      "status": "warning",
+      "statusLabel": "Warning",
+      "accent": "yellow",
       "models": [
         {
           "id": "xai/grok-3",
           "role": "INTEL primary",
-          "status": "active",
+          "status": "warning",
           "testStatus": "api-tested",
-          "latestOutput": "xAI OK"
+          "latestOutput": "INTEL output live, but correction wave still ongoing"
         },
         {
           "id": "xai/grok-4",
           "role": "available",
           "status": "active",
-          "testStatus": "available",
+          "testStatus": "configured",
           "latestOutput": "Configured and retained as non-default"
         }
       ]
@@ -64,6 +80,8 @@
     {
       "name": "Google",
       "status": "active",
+      "statusLabel": "Active",
+      "accent": "green",
       "models": [
         {
           "id": "google/gemini-2.5-flash",
@@ -84,6 +102,8 @@
     {
       "name": "OpenRouter",
       "status": "active",
+      "statusLabel": "Active",
+      "accent": "green",
       "models": [
         {
           "id": "mistralai/mistral-nemo",
@@ -108,94 +128,123 @@
       "primaryModel": "anthropic/claude-opus-4-6",
       "qcModel": "self-review",
       "status": "active",
-      "qcStatus": "operational",
-      "latestOutput": "Roadmap governance, coordination, QC orchestration",
-      "latestIssues": []
+      "statusLabel": "Live",
+      "qcStatus": "passed",
+      "qcLabel": "QC Passed",
+      "latestOutput": "Roadmap governance, coordination, and QC orchestration running cleanly"
     },
     {
       "department": "CMO",
       "primaryModel": "anthropic/claude-sonnet-4-6",
       "qcModel": "openai-codex/gpt-5.4",
-      "status": "produced; mostly passed with non-blocking warnings",
+      "status": "warning",
+      "statusLabel": "Needs phrasing cleanup",
       "qcStatus": "warning",
-      "latestOutput": "Brand guidelines, content calendar, competitor brands, social tracker",
-      "latestIssues": [
-        "Competitor brands file still has a few claims phrased too confidently for the evidence standard."
-      ]
+      "qcLabel": "QC Warning",
+      "latestOutput": "Brand guidelines, content calendar, competitor brands, and social tracker are operational"
     },
     {
       "department": "CSO",
       "primaryModel": "openai-codex/gpt-5.4",
       "qcModel": "anthropic/claude-sonnet-4-6",
-      "status": "produced; QC passed",
+      "status": "active",
+      "statusLabel": "Operational",
       "qcStatus": "passed",
-      "latestOutput": "Distributor DB, pricing intelligence, marketplace tracker, trade shows",
-      "latestIssues": []
+      "qcLabel": "QC Passed",
+      "latestOutput": "Distributor DB, pricing intelligence, marketplace tracker, and trade show stack passed re-QC"
     },
     {
       "department": "CDO",
       "primaryModel": "openai-codex/gpt-5.4",
       "qcModel": "google/gemini-2.5-flash",
-      "status": "produced; mostly passed with non-blocking warnings",
+      "status": "warning",
+      "statusLabel": "Minor registry cleanup",
       "qcStatus": "warning",
-      "latestOutput": "Asset library, visual rules, design queue, template registry",
-      "latestIssues": [
-        "Template registry should add explicit AR/VN native/local review lock notes.",
-        "CDO_SYSTEM model assignment still conflicts with ops/QC_SYSTEM.md."
-      ]
+      "qcLabel": "QC Warning",
+      "latestOutput": "Asset library, visual rules, design queue, and template registry are usable with follow-up notes"
     },
     {
       "department": "INTEL",
       "primaryModel": "xai/grok-3",
       "qcModel": "anthropic/claude-opus-4-6",
-      "status": "produced; still under correction",
-      "qcStatus": "failed / correction",
-      "latestOutput": "Competitor watch, market signals, regulatory tracker, tariff map",
-      "latestIssues": [
-        "Market signals still fails evidence-discipline checks for live market claims.",
-        "Regulatory tracker still fails due to assumed statuses and mixed requirement/estimate/action sections.",
-        "Competitor watch and tariff map improved but still carry warning-level sourcing gaps."
-      ]
+      "status": "down",
+      "statusLabel": "Correction wave active",
+      "qcStatus": "failed",
+      "qcLabel": "QC Failed",
+      "latestOutput": "Competitor watch and tariff map improved, but market signals and regulatory tracker still fail evidence discipline"
     },
     {
       "department": "OPS",
       "primaryModel": "openai-codex/gpt-5.4",
       "qcModel": "anthropic/claude-sonnet-4-6",
-      "status": "produced; QC passed",
+      "status": "active",
+      "statusLabel": "Operational",
       "qcStatus": "passed",
-      "latestOutput": "Agent health, daily report, weekly report, regulatory status, QC system",
-      "latestIssues": []
+      "qcLabel": "QC Passed",
+      "latestOutput": "Agent health, daily report, weekly report, regulatory status, and QC system are stable"
     }
   ],
-  "qcStatus": {
-    "summary": {
-      "ops": "QC PASSED",
-      "cso": "QC PASSED",
-      "cmo": "Mostly passed with non-blocking warnings",
-      "cdo": "Mostly passed with non-blocking warnings",
-      "intel": "Still under correction"
+  "launchPosture": [
+    {
+      "name": "OEM",
+      "status": "green",
+      "label": "GREEN",
+      "note": "Partner narrative and technical posture aligned"
     },
-    "latestOutputsIssues": {
-      "opsCso": [
-        "OPS and CSO re-QC passed with no prior blockers remaining open."
-      ],
-      "cmoCdo": [
-        "Most files now pass and are operationally usable.",
-        "Remaining non-blocking fixes: soften a few competitor claims, add explicit AR/VN review locks, reconcile CDO system model assignment."
-      ],
-      "intel": [
-        "Competitor watch and tariff map improved to warning level.",
-        "Market signals and regulatory tracker remain failed and need more evidence-tight correction.",
-        "Company brief remains usable internally but still warning-level on sourcing discipline."
-      ]
+    {
+      "name": "Regulatory",
+      "status": "amber",
+      "label": "AMBER",
+      "note": "Country-specific evidence discipline still tightening"
+    },
+    {
+      "name": "Capital",
+      "status": "green",
+      "label": "GREEN",
+      "note": "Funding story, controls, and planning stack ready"
+    },
+    {
+      "name": "Packaging",
+      "status": "amber",
+      "label": "AMBER",
+      "note": "Regional review locks need explicit documentation"
+    },
+    {
+      "name": "Commercial",
+      "status": "green",
+      "label": "GREEN",
+      "note": "Go-to-market assets and channel intelligence are usable"
     }
-  },
-  "currentWork": {
-    "roadmap": "created",
-    "qcPhase": "active",
-    "fixesInProgress": [
-      "INTEL corrections",
-      "CMO + CDO warning cleanup"
-    ]
+  ],
+  "marketPriority": [
+    {
+      "market": "MY",
+      "rank": 1,
+      "focus": "Launch-first"
+    },
+    {
+      "market": "UAE",
+      "rank": 2,
+      "focus": "High-value expansion"
+    },
+    {
+      "market": "Saudi",
+      "rank": 3,
+      "focus": "Strategic scale"
+    },
+    {
+      "market": "US",
+      "rank": 4,
+      "focus": "Signal-building"
+    },
+    {
+      "market": "Indonesia",
+      "rank": 5,
+      "focus": "Pipeline development"
+    }
+  ],
+  "footer": {
+    "poweredBy": "Powered by Veela 🐾",
+    "lastUpdatedLabel": "2026-04-03 01:48 UTC"
   }
 }

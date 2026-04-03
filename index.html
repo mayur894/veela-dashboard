@@ -3,127 +3,937 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Veela Model Dashboard</title>
+  <title>VEELA AI ORG — CEO Control Panel</title>
   <style>
-    body { font-family: Inter, Arial, sans-serif; background:#0f172a; color:#e2e8f0; margin:0; padding:24px; }
-    .wrap { max-width:1200px; margin:0 auto; }
-    h1,h2 { margin:0 0 12px; }
-    h3 { margin:0 0 8px; font-size:16px; }
-    .muted { color:#94a3b8; }
-    .grid { display:grid; gap:16px; }
-    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-    .card { background:#111827; border:1px solid #1f2937; border-radius:16px; padding:16px; }
-    .pill { display:inline-block; padding:4px 10px; border-radius:999px; font-size:12px; margin-right:8px; }
-    .ok { background:#064e3b; color:#a7f3d0; }
-    .warn { background:#78350f; color:#fde68a; }
-    .bad { background:#7f1d1d; color:#fecaca; }
-    .info { background:#1e3a8a; color:#bfdbfe; }
-    table { width:100%; border-collapse: collapse; margin-top:8px; }
-    th, td { text-align:left; padding:10px 8px; border-bottom:1px solid #1f2937; vertical-align:top; }
-    th { color:#93c5fd; font-weight:600; }
-    code { color:#93c5fd; }
-    ul { margin:8px 0 0 18px; padding:0; }
-    li { margin:4px 0; }
+    :root {
+      color-scheme: dark;
+      --bg: #060816;
+      --bg-soft: rgba(15, 23, 42, 0.72);
+      --panel: rgba(9, 14, 30, 0.9);
+      --panel-2: rgba(16, 24, 48, 0.86);
+      --line: rgba(148, 163, 184, 0.16);
+      --line-strong: rgba(148, 163, 184, 0.24);
+      --text: #eef2ff;
+      --muted: #9aa7c7;
+      --green: #34d399;
+      --green-soft: rgba(52, 211, 153, 0.18);
+      --yellow: #fbbf24;
+      --yellow-soft: rgba(251, 191, 36, 0.18);
+      --red: #fb7185;
+      --red-soft: rgba(251, 113, 133, 0.16);
+      --blue: #7dd3fc;
+      --violet: #8b5cf6;
+      --shadow: 0 24px 80px rgba(2, 6, 23, 0.55);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --container: 1260px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(139, 92, 246, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(34, 211, 238, 0.14), transparent 25%),
+        linear-gradient(180deg, #050816 0%, #07101f 48%, #050816 100%);
+      letter-spacing: -0.02em;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.03), transparent 18%);
+      opacity: 0.4;
+    }
+
+    .shell {
+      width: min(calc(100% - 1.25rem), var(--container));
+      margin: 0 auto;
+      padding: 1rem 0 2rem;
+    }
+
+    .hero,
+    .card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(10, 15, 31, 0.96), rgba(9, 14, 27, 0.9));
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: clamp(1.25rem, 4vw, 2.5rem);
+      border-radius: calc(var(--radius) + 4px);
+      isolation: isolate;
+    }
+
+    .hero::after,
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(125, 211, 252, 0.08), transparent 35%, rgba(139, 92, 246, 0.09));
+      opacity: 0.7;
+    }
+
+    .hero-grid,
+    .metrics,
+    .provider-grid,
+    .department-grid,
+    .launch-grid,
+    .market-grid,
+    .bottom-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.8rem;
+      border: 1px solid rgba(125, 211, 252, 0.18);
+      border-radius: 999px;
+      background: rgba(125, 211, 252, 0.08);
+      color: #c4ebff;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55);
+      animation: pulse 2.2s infinite;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      margin-top: 0.9rem;
+      font-size: clamp(2rem, 8vw, 4.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      max-width: 10ch;
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    .hero-copy p {
+      max-width: 58ch;
+      color: var(--muted);
+      font-size: clamp(0.96rem, 2.4vw, 1.08rem);
+      line-height: 1.6;
+    }
+
+    .status-badge,
+    .mini-badge,
+    .qc-badge,
+    .posture-badge,
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .status-badge {
+      margin-top: 0.35rem;
+      width: fit-content;
+      padding: 0.65rem 0.95rem;
+      background: var(--yellow-soft);
+      color: #ffe7a3;
+      border: 1px solid rgba(251, 191, 36, 0.24);
+    }
+
+    .status-badge::before,
+    .mini-badge::before,
+    .qc-badge::before,
+    .posture-badge::before {
+      content: "";
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 16px currentColor;
+      opacity: 0.95;
+    }
+
+    .hero-panel {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 0.85rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    }
+
+    .hero-panel-label {
+      color: var(--muted);
+      font-size: 0.77rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .hero-panel strong {
+      font-size: 1.05rem;
+    }
+
+    .section {
+      margin-top: 1rem;
+    }
+
+    .card {
+      border-radius: var(--radius);
+      padding: 1rem;
+      container-type: inline-size;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--line-strong);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.05rem, 3vw, 1.35rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-subtitle {
+      margin-top: 0.25rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .metric {
+      padding: 0.95rem;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      min-height: 112px;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .metric-value {
+      margin-top: 0.5rem;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+
+    .metric-note {
+      margin-top: 0.35rem;
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .progress-wrap {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .progress-bar {
+      position: relative;
+      height: 0.85rem;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(148, 163, 184, 0.12);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      width: 70%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #2dd4bf 0%, #38bdf8 45%, #8b5cf6 100%);
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.35);
+      animation: loadIn 1.4s ease-out;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .provider-grid,
+    .department-grid,
+    .launch-grid,
+    .market-grid,
+    .bottom-grid,
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .provider-card,
+    .dept-card,
+    .posture-card,
+    .market-card {
+      position: relative;
+      z-index: 1;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.025));
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .provider-card:hover,
+    .dept-card:hover,
+    .posture-card:hover,
+    .market-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+      box-shadow: 0 16px 38px rgba(2, 6, 23, 0.28);
+    }
+
+    .provider-top,
+    .dept-top,
+    .market-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .provider-name,
+    .dept-name,
+    .market-name,
+    .posture-name {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .status-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .status-dot::before {
+      content: "";
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55);
+    }
+
+    .status-dot.active::before { background: var(--green); animation: pulse 2s infinite; }
+    .status-dot.warning::before { background: var(--yellow); box-shadow: 0 0 14px rgba(251, 191, 36, 0.48); }
+    .status-dot.down::before { background: var(--red); box-shadow: 0 0 14px rgba(251, 113, 133, 0.45); }
+
+    .model-list {
+      display: grid;
+      gap: 0.75rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .model-item {
+      padding: 0.8rem;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      background: rgba(2, 6, 23, 0.34);
+    }
+
+    .model-item strong,
+    .dept-stack strong {
+      display: block;
+      font-size: 0.92rem;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .model-item span,
+    .dept-stack span,
+    .provider-note,
+    .dept-output,
+    .posture-note,
+    .market-note,
+    footer p {
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+
+    .mini-badge {
+      margin-top: 0.55rem;
+      width: fit-content;
+      padding: 0.42rem 0.68rem;
+      border: 1px solid transparent;
+    }
+
+    .mini-badge.active { color: #b8ffe7; background: var(--green-soft); border-color: rgba(52, 211, 153, 0.18); }
+    .mini-badge.warning { color: #ffe9ad; background: var(--yellow-soft); border-color: rgba(251, 191, 36, 0.18); }
+    .mini-badge.down { color: #ffc0cb; background: var(--red-soft); border-color: rgba(251, 113, 133, 0.16); }
+
+    .dept-card { display: grid; gap: 0.9rem; }
+
+    .dept-stack {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: 1fr;
+    }
+
+    .stack-item {
+      padding: 0.8rem;
+      border-radius: 16px;
+      background: rgba(2, 6, 23, 0.34);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .stack-label {
+      margin-bottom: 0.35rem;
+      color: #cbd5e1;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .qc-badge,
+    .posture-badge,
+    .rank-badge {
+      width: fit-content;
+      padding: 0.44rem 0.7rem;
+      border: 1px solid transparent;
+    }
+
+    .qc-badge.passed,
+    .posture-badge.green {
+      color: #b8ffe7;
+      background: var(--green-soft);
+      border-color: rgba(52, 211, 153, 0.18);
+    }
+
+    .qc-badge.warning,
+    .posture-badge.amber {
+      color: #ffe9ad;
+      background: var(--yellow-soft);
+      border-color: rgba(251, 191, 36, 0.18);
+    }
+
+    .qc-badge.failed,
+    .posture-badge.red {
+      color: #ffc0cb;
+      background: var(--red-soft);
+      border-color: rgba(251, 113, 133, 0.16);
+    }
+
+    .posture-card {
+      display: grid;
+      gap: 0.7rem;
+      align-content: start;
+      min-height: 164px;
+    }
+
+    .market-grid { counter-reset: rank; }
+    .market-card {
+      display: grid;
+      gap: 0.65rem;
+      align-content: start;
+    }
+
+    .rank-badge {
+      color: #dbeafe;
+      background: rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.2);
+    }
+
+    .rank-track {
+      height: 0.65rem;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.11);
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .rank-track span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.95), rgba(139, 92, 246, 0.92));
+    }
+
+    footer {
+      margin-top: 1rem;
+      padding: 1rem 0 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      color: var(--muted);
+    }
+
+    @container (min-width: 420px) {
+      .dept-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (min-width: 700px) {
+      .shell { padding-top: 1.2rem; }
+      .hero-grid { grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.95fr); align-items: end; }
+      .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .provider-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .launch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .market-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      footer { flex-direction: row; justify-content: space-between; align-items: center; }
+    }
+
+    @media (min-width: 1024px) {
+      .provider-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .department-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .launch-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .market-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .bottom-grid { grid-template-columns: 1.15fr 0.85fr; }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5); }
+      70% { box-shadow: 0 0 0 12px rgba(52, 211, 153, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+    }
+
+    @keyframes loadIn {
+      from { width: 0; opacity: 0.6; }
+      to { width: 70%; opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Veela Model Dashboard</h1>
-    <p class="muted">Live-ish control panel for providers, department model ownership, QC, and latest outputs.</p>
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Live org telemetry</div>
+          <div>
+            <h1>VEELA AI ORG</h1>
+            <div class="status-badge">Overall status: AMBER · Stable with targeted corrections</div>
+          </div>
+          <p>The CEO control panel for provider health, department output quality, launch readiness, and market execution. Everything visible at a glance, tuned for fast decisions on mobile and desktop.</p>
+        </div>
 
-    <div class="grid grid-2">
-      <div class="card">
-        <h2>System Summary</h2>
-        <p><span class="pill ok">Primary: Claude Opus 4.6</span><span class="pill info">QC Enabled</span><span class="pill info">Roadmap Live</span></p>
-        <ul>
-          <li>Providers: 5</li>
-          <li>Configured models: 8</li>
-          <li>Operating mode: department + QC + correction waves</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Current Work</h2>
-        <ul>
-          <li>Roadmap system: created</li>
-          <li>QC phase: active</li>
-          <li>Fixes in progress: INTEL corrections, CMO + CDO warning cleanup</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:16px;">
-      <h2>QC Status</h2>
-      <div class="grid grid-3">
-        <div>
-          <h3>OPS</h3>
-          <p><span class="pill ok">QC PASSED</span></p>
-        </div>
-        <div>
-          <h3>CSO</h3>
-          <p><span class="pill ok">QC PASSED</span></p>
-        </div>
-        <div>
-          <h3>CMO</h3>
-          <p><span class="pill warn">Mostly passed + warnings</span></p>
-        </div>
-        <div>
-          <h3>CDO</h3>
-          <p><span class="pill warn">Mostly passed + warnings</span></p>
-        </div>
-        <div>
-          <h3>INTEL</h3>
-          <p><span class="pill bad">Under correction</span></p>
+        <div class="hero-panel">
+          <span class="hero-panel-label">Operating mode</span>
+          <strong>Department + QC + correction waves</strong>
+          <span class="hero-panel-label">Primary runtime</span>
+          <strong>anthropic/claude-opus-4-6</strong>
+          <span class="hero-panel-label">QC posture</span>
+          <strong>Enabled across active departments</strong>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="card" style="margin-top:16px;">
-      <h2>Latest Outputs / Issues</h2>
-      <ul>
-        <li><strong>OPS + CSO:</strong> Re-QC passed. No previously flagged blockers remain open.</li>
-        <li><strong>CMO + CDO:</strong> Most files are now operationally usable. Remaining issues are non-blocking: a few competitor-claim phrasing cleanups, explicit AR/VN review locks in template registry, and a CDO system model-assignment mismatch.</li>
-        <li><strong>INTEL:</strong> Competitor watch and tariff map improved to warning level, but market signals and regulatory tracker still fail evidence-discipline checks and need more correction.</li>
-      </ul>
-    </div>
+    <section class="section card">
+      <div class="card-header">
+        <div>
+          <h2 class="section-title">Executive snapshot</h2>
+          <p class="section-subtitle">The numbers that matter right now.</p>
+        </div>
+      </div>
 
-    <div class="card" style="margin-top:16px;">
-      <h2>Provider Status</h2>
-      <table>
-        <thead>
-          <tr><th>Provider</th><th>Model</th><th>Status</th><th>Role</th><th>Latest Output</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Anthropic</td><td><code>anthropic/claude-opus-4-6</code></td><td><span class="pill ok">runtime-confirmed</span></td><td>CEO / coordinator</td><td>Current chat session is running on Claude Opus 4.6</td></tr>
-          <tr><td>Anthropic</td><td><code>anthropic/claude-sonnet-4-6</code></td><td><span class="pill ok">runtime-confirmed</span></td><td>CMO primary / QC</td><td>Used successfully for departments, QC, and roadmap work</td></tr>
-          <tr><td>OpenAI OAuth</td><td><code>openai-codex/gpt-5.4</code></td><td><span class="pill ok">auth-confirmed</span></td><td>CSO / CDO / OPS primary</td><td>ChatGPT OAuth active</td></tr>
-          <tr><td>xAI</td><td><code>xai/grok-3</code></td><td><span class="pill ok">api-tested</span></td><td>INTEL primary</td><td>xAI OK</td></tr>
-          <tr><td>Google</td><td><code>google/gemini-2.5-flash</code></td><td><span class="pill ok">api-tested</span></td><td>Fast multimodal / QC</td><td>Gemini OK</td></tr>
-          <tr><td>OpenRouter</td><td><code>mistralai/mistral-nemo</code></td><td><span class="pill ok">api-tested</span></td><td>Cheap grunt work</td><td>OpenRouter OK</td></tr>
-          <tr><td>Google</td><td><code>google/gemini-2.5-pro</code></td><td><span class="pill info">configured</span></td><td>Deep multimodal</td><td>Configured and previously tested successfully</td></tr>
-          <tr><td>xAI</td><td><code>xai/grok-4</code></td><td><span class="pill info">configured</span></td><td>Available</td><td>Configured and retained as non-default</td></tr>
-        </tbody>
-      </table>
-    </div>
+      <div class="metrics">
+        <article class="metric">
+          <div class="metric-label">Providers</div>
+          <div class="metric-value">5</div>
+          <div class="metric-note">Multi-provider stack active across core operations.</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Configured models</div>
+          <div class="metric-value">9</div>
+          <div class="metric-note">Primary, QC, multimodal, and low-cost support lanes.</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Files across org</div>
+          <div class="metric-value">146</div>
+          <div class="metric-note">Operational artifacts, trackers, templates, and reports.</div>
+        </article>
+        <article class="metric">
+          <div class="metric-label">Wave progress</div>
+          <div class="progress-wrap">
+            <div class="metric-value">7/10</div>
+            <div class="progress-bar"><span></span></div>
+            <div class="progress-meta"><span>7 waves completed</span><span>70%</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-    <div class="card" style="margin-top:16px;">
-      <h2>Department Status</h2>
-      <table>
-        <thead>
-          <tr><th>Department</th><th>Primary Model</th><th>QC Model</th><th>Status</th><th>Latest Output / Issues</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>CEO</td><td><code>anthropic/claude-opus-4-6</code></td><td>self-review</td><td><span class="pill ok">active</span></td><td>Roadmap governance, coordination, QC orchestration</td></tr>
-          <tr><td>CMO</td><td><code>anthropic/claude-sonnet-4-6</code></td><td><code>openai-codex/gpt-5.4</code></td><td><span class="pill warn">mostly passed</span></td><td>Brand guidelines, content calendar, competitor brands, social tracker. Warning: a few competitor statements still need softer evidence phrasing.</td></tr>
-          <tr><td>CSO</td><td><code>openai-codex/gpt-5.4</code></td><td><code>anthropic/claude-sonnet-4-6</code></td><td><span class="pill ok">QC passed</span></td><td>Distributor DB, pricing intelligence, marketplace tracker, trade shows</td></tr>
-          <tr><td>CDO</td><td><code>openai-codex/gpt-5.4</code></td><td><code>google/gemini-2.5-flash</code></td><td><span class="pill warn">mostly passed</span></td><td>Asset library, visual rules, design queue, template registry. Warnings: explicit AR/VN review locks still needed; CDO system model assignment should be reconciled.</td></tr>
-          <tr><td>INTEL</td><td><code>xai/grok-3</code></td><td><code>anthropic/claude-opus-4-6</code></td><td><span class="pill bad">under correction</span></td><td>Competitor watch, market signals, regulatory tracker, tariff map. Fails remain in market signals and regulatory tracker; competitor watch and tariff map are improved but still warning-level.</td></tr>
-          <tr><td>OPS</td><td><code>openai-codex/gpt-5.4</code></td><td><code>anthropic/claude-sonnet-4-6</code></td><td><span class="pill ok">QC passed</span></td><td>Agent health, daily report, weekly report, regulatory status, QC system</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <section class="section card">
+      <div class="card-header">
+        <div>
+          <h2 class="section-title">Provider status</h2>
+          <p class="section-subtitle">Green = active, yellow = warning, red = down.</p>
+        </div>
+      </div>
 
-    <p class="muted" style="margin-top:16px;">Source files: <code>model-dashboard.json</code>, QC reports under <code>ops/</code>.</p>
-  </div>
+      <div class="provider-grid">
+        <article class="provider-card">
+          <div class="provider-top">
+            <div class="provider-name">Anthropic</div>
+            <div class="status-dot active">Active</div>
+          </div>
+          <ul class="model-list">
+            <li class="model-item">
+              <strong>anthropic/claude-opus-4-6</strong>
+              <span>CEO / main coordinator</span>
+              <div class="mini-badge active">runtime-confirmed</div>
+            </li>
+            <li class="model-item">
+              <strong>anthropic/claude-sonnet-4-6</strong>
+              <span>CMO primary / QC / subagents</span>
+              <div class="mini-badge active">runtime-confirmed</div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="provider-card">
+          <div class="provider-top">
+            <div class="provider-name">OpenAI OAuth</div>
+            <div class="status-dot active">Active</div>
+          </div>
+          <ul class="model-list">
+            <li class="model-item">
+              <strong>openai-codex/gpt-5.4</strong>
+              <span>CSO / CDO / OPS primary</span>
+              <div class="mini-badge active">auth-confirmed</div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="provider-card">
+          <div class="provider-top">
+            <div class="provider-name">xAI</div>
+            <div class="status-dot warning">Warning</div>
+          </div>
+          <ul class="model-list">
+            <li class="model-item">
+              <strong>xai/grok-3</strong>
+              <span>INTEL primary</span>
+              <div class="mini-badge warning">api-tested · correction wave active</div>
+            </li>
+            <li class="model-item">
+              <strong>xai/grok-4</strong>
+              <span>Available reserve lane</span>
+              <div class="mini-badge active">configured</div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="provider-card">
+          <div class="provider-top">
+            <div class="provider-name">Google</div>
+            <div class="status-dot active">Active</div>
+          </div>
+          <ul class="model-list">
+            <li class="model-item">
+              <strong>google/gemini-2.5-flash</strong>
+              <span>OPS QC / fast multimodal</span>
+              <div class="mini-badge active">api-tested</div>
+            </li>
+            <li class="model-item">
+              <strong>google/gemini-2.5-pro</strong>
+              <span>CDO / INTEL multimodal</span>
+              <div class="mini-badge active">configured</div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="provider-card">
+          <div class="provider-top">
+            <div class="provider-name">OpenRouter</div>
+            <div class="status-dot active">Active</div>
+          </div>
+          <ul class="model-list">
+            <li class="model-item">
+              <strong>mistralai/mistral-nemo</strong>
+              <span>Grunt work / formatting</span>
+              <div class="mini-badge active">api-tested</div>
+            </li>
+            <li class="model-item">
+              <strong>nvidia/nemotron-nano-9b-v2</strong>
+              <span>Tables / structured data</span>
+              <div class="mini-badge warning">configured</div>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section card">
+      <div class="card-header">
+        <div>
+          <h2 class="section-title">Department command layer</h2>
+          <p class="section-subtitle">Primary model, QC model, delivery status, latest output, and pass/fail posture.</p>
+        </div>
+      </div>
+
+      <div class="department-grid">
+        <article class="dept-card">
+          <div class="dept-top">
+            <div class="dept-name">CEO</div>
+            <div class="status-dot active">Live</div>
+          </div>
+          <div class="dept-stack">
+            <div class="stack-item">
+              <div class="stack-label">Primary model</div>
+              <strong>anthropic/claude-opus-4-6</strong>
+            </div>
+            <div class="stack-item">
+              <div class="stack-label">QC model</div>
+              <strong>self-review</strong>
+            </div>
+          </div>
+          <div class="qc-badge passed">QC Passed</div>
+          <p class="dept-output">Roadmap governance, coordination, and QC orchestration running cleanly.</p>
+        </article>
+
+        <article class="dept-card">
+          <div class="dept-top">
+            <div class="dept-name">CMO</div>
+            <div class="status-dot warning">Warning</div>
+          </div>
+          <div class="dept-stack">
+            <div class="stack-item">
+              <div class="stack-label">Primary model</div>
+              <strong>anthropic/claude-sonnet-4-6</strong>
+            </div>
+            <div class="stack-item">
+              <div class="stack-label">QC model</div>
+              <strong>openai-codex/gpt-5.4</strong>
+            </div>
+          </div>
+          <div class="qc-badge warning">QC Warning</div>
+          <p class="dept-output">Brand guidelines, content calendar, competitor brands, and social tracker are operational, with minor evidence-phrasing cleanup remaining.</p>
+        </article>
+
+        <article class="dept-card">
+          <div class="dept-top">
+            <div class="dept-name">CSO</div>
+            <div class="status-dot active">Operational</div>
+          </div>
+          <div class="dept-stack">
+            <div class="stack-item">
+              <div class="stack-label">Primary model</div>
+              <strong>openai-codex/gpt-5.4</strong>
+            </div>
+            <div class="stack-item">
+              <div class="stack-label">QC model</div>
+              <strong>anthropic/claude-sonnet-4-6</strong>
+            </div>
+          </div>
+          <div class="qc-badge passed">QC Passed</div>
+          <p class="dept-output">Distributor DB, pricing intelligence, marketplace tracker, and trade show stack passed re-QC.</p>
+        </article>
+
+        <article class="dept-card">
+          <div class="dept-top">
+            <div class="dept-name">CDO</div>
+            <div class="status-dot warning">Warning</div>
+          </div>
+          <div class="dept-stack">
+            <div class="stack-item">
+              <div class="stack-label">Primary model</div>
+              <strong>openai-codex/gpt-5.4</strong>
+            </div>
+            <div class="stack-item">
+              <div class="stack-label">QC model</div>
+              <strong>google/gemini-2.5-flash</strong>
+            </div>
+          </div>
+          <div class="qc-badge warning">QC Warning</div>
+          <p class="dept-output">Asset library, visual rules, design queue, and template registry are usable, with explicit regional review locks still to document.</p>
+        </article>
+
+        <article class="dept-card">
+          <div class="dept-top">
+            <div class="dept-name">INTEL</div>
+            <div class="status-dot down">Correction active</div>
+          </div>
+          <div class="dept-stack">
+            <div class="stack-item">
+              <div class="stack-label">Primary model</div>
+              <strong>xai/grok-3</strong>
+            </div>
+            <div class="stack-item">
+              <div class="stack-label">QC model</div>
+              <strong>anthropic/claude-opus-4-6</strong>
+            </div>
+          </div>
+          <div class="qc-badge failed">QC Failed</div>
+          <p class="dept-output">Competitor watch and tariff map improved, but market signals and regulatory tracker still fail evidence discipline.</p>
+        </article>
+
+        <article class="dept-card">
+          <div class="dept-top">
+            <div class="dept-name">OPS</div>
+            <div class="status-dot active">Operational</div>
+          </div>
+          <div class="dept-stack">
+            <div class="stack-item">
+              <div class="stack-label">Primary model</div>
+              <strong>openai-codex/gpt-5.4</strong>
+            </div>
+            <div class="stack-item">
+              <div class="stack-label">QC model</div>
+              <strong>anthropic/claude-sonnet-4-6</strong>
+            </div>
+          </div>
+          <div class="qc-badge passed">QC Passed</div>
+          <p class="dept-output">Agent health, daily report, weekly report, regulatory status, and QC system are stable.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section bottom-grid">
+      <article class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="section-title">Launch posture</h2>
+            <p class="section-subtitle">Red / amber / green view across critical launch vectors.</p>
+          </div>
+        </div>
+        <div class="launch-grid">
+          <article class="posture-card">
+            <div class="posture-name">OEM</div>
+            <div class="posture-badge green">GREEN</div>
+            <p class="posture-note">Partner narrative and technical posture aligned.</p>
+          </article>
+          <article class="posture-card">
+            <div class="posture-name">Regulatory</div>
+            <div class="posture-badge amber">AMBER</div>
+            <p class="posture-note">Country-specific evidence discipline still tightening.</p>
+          </article>
+          <article class="posture-card">
+            <div class="posture-name">Capital</div>
+            <div class="posture-badge green">GREEN</div>
+            <p class="posture-note">Funding story, controls, and planning stack ready.</p>
+          </article>
+          <article class="posture-card">
+            <div class="posture-name">Packaging</div>
+            <div class="posture-badge amber">AMBER</div>
+            <p class="posture-note">Regional review locks need explicit documentation.</p>
+          </article>
+          <article class="posture-card">
+            <div class="posture-name">Commercial</div>
+            <div class="posture-badge green">GREEN</div>
+            <p class="posture-note">Go-to-market assets and channel intelligence are usable.</p>
+          </article>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <div>
+            <h2 class="section-title">Market priority</h2>
+            <p class="section-subtitle">Ranked launch focus across the current strategic map.</p>
+          </div>
+        </div>
+        <div class="market-grid">
+          <article class="market-card">
+            <div class="market-top">
+              <div class="market-name">MY</div>
+              <div class="rank-badge">#1</div>
+            </div>
+            <div class="rank-track"><span style="width: 100%"></span></div>
+            <p class="market-note">Launch-first</p>
+          </article>
+          <article class="market-card">
+            <div class="market-top">
+              <div class="market-name">UAE</div>
+              <div class="rank-badge">#2</div>
+            </div>
+            <div class="rank-track"><span style="width: 82%"></span></div>
+            <p class="market-note">High-value expansion</p>
+          </article>
+          <article class="market-card">
+            <div class="market-top">
+              <div class="market-name">Saudi</div>
+              <div class="rank-badge">#3</div>
+            </div>
+            <div class="rank-track"><span style="width: 66%"></span></div>
+            <p class="market-note">Strategic scale</p>
+          </article>
+          <article class="market-card">
+            <div class="market-top">
+              <div class="market-name">US</div>
+              <div class="rank-badge">#4</div>
+            </div>
+            <div class="rank-track"><span style="width: 48%"></span></div>
+            <p class="market-note">Signal-building</p>
+          </article>
+          <article class="market-card">
+            <div class="market-top">
+              <div class="market-name">Indonesia</div>
+              <div class="rank-badge">#5</div>
+            </div>
+            <div class="rank-track"><span style="width: 34%"></span></div>
+            <p class="market-note">Pipeline development</p>
+          </article>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <p>Last updated: 2026-04-03 01:48 UTC</p>
+      <p>Powered by Veela 🐾</p>
+    </footer>
+  </main>
 </body>
 </html>
