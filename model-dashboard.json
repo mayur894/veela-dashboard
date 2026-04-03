@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-04-03T01:48:00Z",
+  "updatedAt": "2026-04-03T02:07:54Z",
   "org": {
     "name": "VEELA AI ORG",
-    "tagline": "CEO control panel for model operations, launch readiness, and market execution.",
-    "overallStatus": "AMBER",
-    "overallStatusLabel": "Stable with targeted corrections",
-    "files": 146,
-    "wavesCompleted": 7,
+    "tagline": "CEO control panel \u2014 live model operations, launch readiness, and market execution.",
+    "overallStatus": "RED",
+    "overallStatusLabel": "Setup complete. Hard gates uncleared.",
+    "files": 149,
+    "wavesCompleted": 8,
     "totalWaves": 10,
-    "liveMode": "Department + QC + correction waves"
+    "liveMode": "Continuous department execution + QC"
   },
   "summary": {
     "providers": 5,
@@ -29,14 +29,14 @@
           "role": "CEO / main coordinator",
           "status": "active",
           "testStatus": "runtime-confirmed",
-          "latestOutput": "Current control session running on Claude Opus 4.6"
+          "latestOutput": "Live control session"
         },
         {
           "id": "anthropic/claude-sonnet-4-6",
           "role": "CMO primary / QC / subagents",
           "status": "active",
           "testStatus": "runtime-confirmed",
-          "latestOutput": "Used successfully for department builds, QC, and roadmap work"
+          "latestOutput": "Subagent work running"
         }
       ]
     },
@@ -51,29 +51,29 @@
           "role": "CSO / CDO / OPS primary",
           "status": "active",
           "testStatus": "auth-confirmed",
-          "latestOutput": "ChatGPT OAuth active and available to OpenClaw"
+          "latestOutput": "OAuth active"
         }
       ]
     },
     {
       "name": "xAI",
-      "status": "warning",
-      "statusLabel": "Warning",
-      "accent": "yellow",
+      "status": "active",
+      "statusLabel": "Active",
+      "accent": "green",
       "models": [
         {
           "id": "xai/grok-3",
           "role": "INTEL primary",
-          "status": "warning",
-          "testStatus": "api-tested",
-          "latestOutput": "INTEL output live, but correction wave still ongoing"
+          "status": "active",
+          "testStatus": "live-tested",
+          "latestOutput": "Live tested just now"
         },
         {
           "id": "xai/grok-4",
           "role": "available",
           "status": "active",
           "testStatus": "configured",
-          "latestOutput": "Configured and retained as non-default"
+          "latestOutput": "Configured"
         }
       ]
     },
@@ -87,15 +87,15 @@
           "id": "google/gemini-2.5-flash",
           "role": "OPS QC / fast multimodal",
           "status": "active",
-          "testStatus": "api-tested",
-          "latestOutput": "Gemini OK"
+          "testStatus": "live-tested",
+          "latestOutput": "Live tested just now"
         },
         {
           "id": "google/gemini-2.5-pro",
           "role": "CDO / INTEL multimodal",
           "status": "active",
           "testStatus": "configured",
-          "latestOutput": "Configured and previously tested successfully"
+          "latestOutput": "Configured"
         }
       ]
     },
@@ -109,15 +109,15 @@
           "id": "mistralai/mistral-nemo",
           "role": "grunt work / formatting",
           "status": "active",
-          "testStatus": "api-tested",
-          "latestOutput": "OpenRouter OK"
+          "testStatus": "live-tested",
+          "latestOutput": "Live tested just now"
         },
         {
           "id": "nvidia/nemotron-nano-9b-v2",
           "role": "tables / structured data",
           "status": "configured",
           "testStatus": "configured",
-          "latestOutput": "Configured for cheap structured work"
+          "latestOutput": "Configured"
         }
       ]
     }
@@ -131,17 +131,17 @@
       "statusLabel": "Live",
       "qcStatus": "passed",
       "qcLabel": "QC Passed",
-      "latestOutput": "Roadmap governance, coordination, and QC orchestration running cleanly"
+      "latestOutput": "Roadmap governance + coordination active"
     },
     {
       "department": "CMO",
       "primaryModel": "anthropic/claude-sonnet-4-6",
       "qcModel": "openai-codex/gpt-5.4",
-      "status": "warning",
-      "statusLabel": "Needs phrasing cleanup",
-      "qcStatus": "warning",
-      "qcLabel": "QC Warning",
-      "latestOutput": "Brand guidelines, content calendar, competitor brands, and social tracker are operational"
+      "status": "active",
+      "statusLabel": "Operational",
+      "qcStatus": "passed",
+      "qcLabel": "QC Passed",
+      "latestOutput": "Brand guidelines, content, copy drafts, founder review pack"
     },
     {
       "department": "CSO",
@@ -151,27 +151,27 @@
       "statusLabel": "Operational",
       "qcStatus": "passed",
       "qcLabel": "QC Passed",
-      "latestOutput": "Distributor DB, pricing intelligence, marketplace tracker, and trade show stack passed re-QC"
+      "latestOutput": "Distributor DB, outreach drafts, pricing, send-readiness board"
     },
     {
       "department": "CDO",
       "primaryModel": "openai-codex/gpt-5.4",
       "qcModel": "google/gemini-2.5-flash",
-      "status": "warning",
-      "statusLabel": "Minor registry cleanup",
-      "qcStatus": "warning",
-      "qcLabel": "QC Warning",
-      "latestOutput": "Asset library, visual rules, design queue, and template registry are usable with follow-up notes"
+      "status": "active",
+      "statusLabel": "Operational",
+      "qcStatus": "passed",
+      "qcLabel": "QC Passed",
+      "latestOutput": "Asset library, packaging framework, Shopee checklist, shot list"
     },
     {
       "department": "INTEL",
       "primaryModel": "xai/grok-3",
       "qcModel": "anthropic/claude-opus-4-6",
-      "status": "down",
-      "statusLabel": "Correction wave active",
-      "qcStatus": "failed",
-      "qcLabel": "QC Failed",
-      "latestOutput": "Competitor watch and tariff map improved, but market signals and regulatory tracker still fail evidence discipline"
+      "status": "warning",
+      "statusLabel": "Strategy-grade",
+      "qcStatus": "warning",
+      "qcLabel": "QC Warning",
+      "latestOutput": "Competitor watch, verification queue, market hypothesis board"
     },
     {
       "department": "OPS",
@@ -181,70 +181,70 @@
       "statusLabel": "Operational",
       "qcStatus": "passed",
       "qcLabel": "QC Passed",
-      "latestOutput": "Agent health, daily report, weekly report, regulatory status, and QC system are stable"
+      "latestOutput": "Launch gates, blockers, risk register, critical path"
     }
   ],
   "launchPosture": [
     {
       "name": "OEM",
-      "status": "green",
-      "label": "GREEN",
-      "note": "Partner narrative and technical posture aligned"
+      "status": "red",
+      "label": "RED",
+      "note": "No audit/cert proof yet"
     },
     {
       "name": "Regulatory",
-      "status": "amber",
-      "label": "AMBER",
-      "note": "Country-specific evidence discipline still tightening"
+      "status": "red",
+      "label": "RED",
+      "note": "4 major unknowns unresolved"
     },
     {
       "name": "Capital",
-      "status": "green",
-      "label": "GREEN",
-      "note": "Funding story, controls, and planning stack ready"
+      "status": "red",
+      "label": "RED",
+      "note": "$150-250K not confirmed"
     },
     {
       "name": "Packaging",
       "status": "amber",
       "label": "AMBER",
-      "note": "Regional review locks need explicit documentation"
+      "note": "Architecture lockable, compliance conditional"
     },
     {
       "name": "Commercial",
-      "status": "green",
-      "label": "GREEN",
-      "note": "Go-to-market assets and channel intelligence are usable"
+      "status": "amber",
+      "label": "AMBER",
+      "note": "Prep continues, commitments conditional"
     }
   ],
   "marketPriority": [
     {
       "market": "MY",
       "rank": 1,
-      "focus": "Launch-first"
+      "focus": "Lead hypothesis"
     },
     {
       "market": "UAE",
       "rank": 2,
-      "focus": "High-value expansion"
+      "focus": "Lead hypothesis"
     },
     {
       "market": "Saudi",
       "rank": 3,
-      "focus": "Strategic scale"
+      "focus": "Warm, gated"
     },
     {
       "market": "US",
       "rank": 4,
-      "focus": "Signal-building"
+      "focus": "Optionality"
     },
     {
       "market": "Indonesia",
       "rank": 5,
-      "focus": "Pipeline development"
+      "focus": "Blocked/delayed"
     }
   ],
   "footer": {
-    "poweredBy": "Powered by Veela 🐾",
-    "lastUpdatedLabel": "2026-04-03 01:48 UTC"
+    "poweredBy": "Powered by Veela \ud83d\udc3e",
+    "lastUpdatedLabel": "2026-04-03 02:07 UTC"
   }
 }
