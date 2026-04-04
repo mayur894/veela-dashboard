@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-04T06:33:26Z",
+  "updatedAt": "2026-04-04T07:00:08Z",
   "org": {
     "name": "VEELA AI ORG",
     "tagline": "CEO control panel \u2014 live model operations, launch readiness, and market execution.",
@@ -26,17 +26,17 @@
       "models": [
         {
           "id": "anthropic/claude-opus-4-6",
-          "role": "CEO / main coordinator",
+          "role": "CEO / CSO lead",
           "status": "active",
           "testStatus": "runtime-confirmed",
-          "latestOutput": "Live control session"
+          "latestOutput": "Executive control + CSO lead routing"
         },
         {
           "id": "anthropic/claude-sonnet-4-6",
-          "role": "CMO primary / QC / subagents",
+          "role": "OPS lead / QC",
           "status": "active",
           "testStatus": "runtime-confirmed",
-          "latestOutput": "Subagent work running"
+          "latestOutput": "OPS lead routing + QC support"
         }
       ]
     },
@@ -48,10 +48,10 @@
       "models": [
         {
           "id": "openai-codex/gpt-5.4",
-          "role": "CSO / CDO / OPS primary",
+          "role": "CMO lead / coding / cross-lane fallback",
           "status": "active",
           "testStatus": "auth-confirmed",
-          "latestOutput": "OAuth active"
+          "latestOutput": "CMO lead routing active"
         }
       ]
     },
@@ -85,17 +85,17 @@
       "models": [
         {
           "id": "google/gemini-2.5-flash",
-          "role": "OPS QC / fast multimodal",
+          "role": "Fast helper / content support",
           "status": "active",
           "testStatus": "live-tested",
-          "latestOutput": "Live tested just now"
+          "latestOutput": "Configured helper lane"
         },
         {
           "id": "google/gemini-2.5-pro",
-          "role": "CDO / INTEL multimodal",
+          "role": "INTEL lead / research synthesis",
           "status": "active",
           "testStatus": "configured",
-          "latestOutput": "Configured"
+          "latestOutput": "INTEL lead routing active"
         }
       ]
     },
@@ -126,62 +126,62 @@
     {
       "department": "CEO",
       "primaryModel": "anthropic/claude-opus-4-6",
-      "qcModel": "self-review",
+      "qcModel": "openai-codex/gpt-5.4 or anthropic/claude-sonnet-4-6",
       "status": "active",
       "statusLabel": "Live",
       "qcStatus": "passed",
       "qcLabel": "QC Passed",
-      "latestOutput": "Roadmap governance + coordination active"
+      "latestOutput": "Roadmap governance + continuity control active"
     },
     {
-      "department": "CMO",
+      "department": "OPS",
       "primaryModel": "anthropic/claude-sonnet-4-6",
       "qcModel": "openai-codex/gpt-5.4",
       "status": "active",
       "statusLabel": "Operational",
       "qcStatus": "passed",
       "qcLabel": "QC Passed",
-      "latestOutput": "Brand guidelines, content, copy drafts, founder review pack"
+      "latestOutput": "Launch gates, blockers, tracker hygiene, continuity control"
     },
     {
       "department": "CSO",
+      "primaryModel": "anthropic/claude-opus-4-6",
+      "qcModel": "openai-codex/gpt-5.4",
+      "status": "active",
+      "statusLabel": "Operational",
+      "qcStatus": "passed",
+      "qcLabel": "QC Passed",
+      "latestOutput": "OEM outreach pack, pricing draft, distributor DB updates"
+    },
+    {
+      "department": "CMO",
       "primaryModel": "openai-codex/gpt-5.4",
       "qcModel": "anthropic/claude-sonnet-4-6",
       "status": "active",
       "statusLabel": "Operational",
       "qcStatus": "passed",
       "qcLabel": "QC Passed",
-      "latestOutput": "Distributor DB, outreach drafts, pricing, send-readiness board"
+      "latestOutput": "Content calendar, social drafts, approval-ready copy"
     },
     {
       "department": "CDO",
-      "primaryModel": "openai-codex/gpt-5.4",
-      "qcModel": "google/gemini-2.5-flash",
+      "primaryModel": "qwen-portal/coder-model",
+      "qcModel": "anthropic/claude-opus-4-6",
       "status": "active",
       "statusLabel": "Operational",
       "qcStatus": "passed",
       "qcLabel": "QC Passed",
-      "latestOutput": "Asset library, packaging framework, Shopee checklist, shot list"
+      "latestOutput": "Packaging lock matrix, design queue, one-pager/layout specs"
     },
     {
       "department": "INTEL",
-      "primaryModel": "xai/grok-3",
-      "qcModel": "anthropic/claude-opus-4-6",
+      "primaryModel": "google/gemini-2.5-pro",
+      "qcModel": "anthropic/claude-sonnet-4-6",
       "status": "warning",
-      "statusLabel": "Strategy-grade",
+      "statusLabel": "Decision support",
       "qcStatus": "warning",
       "qcLabel": "QC Warning",
-      "latestOutput": "Competitor watch, verification queue, market hypothesis board"
-    },
-    {
-      "department": "OPS",
-      "primaryModel": "openai-codex/gpt-5.4",
-      "qcModel": "anthropic/claude-sonnet-4-6",
-      "status": "active",
-      "statusLabel": "Operational",
-      "qcStatus": "passed",
-      "qcLabel": "QC Passed",
-      "latestOutput": "Launch gates, blockers, risk register, critical path"
+      "latestOutput": "Verification board active; OQ-REG-01/04 still need source-backed closeout"
     }
   ],
   "launchPosture": [
@@ -245,6 +245,6 @@
   ],
   "footer": {
     "poweredBy": "Powered by Veela \ud83d\udc3e",
-    "lastUpdatedLabel": "2026-04-04 06:33 UTC"
+    "lastUpdatedLabel": "2026-04-04 07:00 UTC"
   }
 }
