@@ -232,11 +232,11 @@
 
     <section class="tabs-wrap section" aria-label="Dashboard tabs">
       <nav class="tabs-nav" id="tab-nav">
-        <button class="tab-btn active" onclick="switchTab('overview')" type="button" data-tab="overview" onclick="showTab('overview')">Overview</button>
-        <button class="tab-btn" type="button" onclick="switchTab('overview')" data-tab="operations" onclick="showTab('operations')">Operations</button>
-        <button class="tab-btn" type="button" onclick="switchTab('overview')" data-tab="markets" onclick="showTab('markets')">Markets</button>
-        <button class="tab-btn" type="button" onclick="switchTab('overview')" data-tab="content" onclick="showTab('content')">Content</button>
-        <button class="tab-btn" type="button" onclick="switchTab('overview')" data-tab="docs" onclick="showTab('docs')">Docs</button>
+        <button class="tab-btn active" type="button" data-tab="overview">Overview</button>
+        <button class="tab-btn" type="button" data-tab="operations">Operations</button>
+        <button class="tab-btn" type="button" data-tab="markets">Markets</button>
+        <button class="tab-btn" type="button" data-tab="content">Content</button>
+        <button class="tab-btn" type="button" data-tab="docs">Docs</button>
       </nav>
 
       <div class="tab-shell">
@@ -474,8 +474,7 @@ function showTab(t){
             '',
             'Overall Notes',
             overallNotes || '—'
-          ].join('
-');
+          ].join('\n');
           const mailto = `mailto:mayur@veela.pet?subject=${encodeURIComponent('Veela CEO Decision')}&body=${encodeURIComponent(body)}`;
           window.location.href = mailto;
           feedback.className = 'feedback show';
