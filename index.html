@@ -11,10 +11,10 @@
       --panel:#101b28;
       --panel-2:#152334;
       --line:#223548;
+      --line-2:#35516b;
       --text:#ebf3fb;
       --muted:#96a9bd;
       --red:#ef4444;
-      --red-2:#7f1d1d;
       --amber:#f59e0b;
       --green:#22c55e;
       --teal:#2dd4bf;
@@ -54,7 +54,7 @@
     .alert-copy{font-weight:800;letter-spacing:.02em}
     .alert-copy strong{color:#fff}
     .quick-jumps{display:flex;gap:8px;flex-wrap:wrap}
-    .jump,.btn,.pill{
+    .jump,.btn,.pill,.more-indicator{
       display:inline-flex;align-items:center;gap:6px;
       border:1px solid var(--line);
       border-radius:999px;
@@ -88,7 +88,7 @@
     .kpi.urgent{border-color:#6a2525;background:linear-gradient(180deg,#221317,#181d26)}
     .kpi-value{margin-top:8px;font:800 34px/1 ui-monospace,SFMono-Regular,Menlo,monospace}
     .kpi-note{margin-top:8px;font-size:12px;color:var(--muted)}
-    .list{display:grid;gap:10px}
+    .list,.compact-list,.cards-tight{display:grid;gap:10px}
     .item{padding:13px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--panel-2)}
     .item.urgent{border-left:5px solid var(--red);background:linear-gradient(180deg,#211418,#17202b);box-shadow:inset 0 0 0 1px rgba(239,68,68,.12)}
     .item.critical h3{font-size:17px}
@@ -99,24 +99,65 @@
     .decision-grid{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
     .decision-consequence{margin-top:9px;padding:8px 10px;border-radius:12px;background:#1c1518;border:1px solid #4a272b;color:#ffd8d8;font-size:12px}
     .linkline{margin-top:8px;font-size:12px}
-    .compact-list{display:grid;gap:8px}
     .compact-item{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:rgba(21,35,52,.8)}
     .statusline{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-    .cards-tight{display:grid;gap:10px}
-    .cards-tight .item{padding:12px}
     .log-bad{color:#ffb4b4}.log-warn{color:#ffe09a}.log-good{color:#bdf7cf}
     details.docs{overflow:hidden}
-    details.docs > summary{
-      list-style:none;cursor:pointer;padding:16px 18px;
-      display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
+    details.docs > summary,
+    details.drill > summary{
+      list-style:none;cursor:pointer;
     }
-    details.docs > summary::-webkit-details-marker{display:none}
+    details.docs > summary::-webkit-details-marker,
+    details.drill > summary::-webkit-details-marker{display:none}
     .docs-body{padding:0 18px 18px}
     .doc-grid{display:grid;gap:10px;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:8px}
     .doc-card{padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2)}
-    .sticky-mobile-cta{display:none}
     .divider{height:1px;background:var(--line);margin:12px 0}
+    .sticky-mobile-cta{display:none}
     .hide-desktop{display:none}
+
+    details.drill{
+      border:1px solid var(--line);
+      border-radius:var(--radius-sm);
+      background:var(--panel-2);
+      overflow:hidden;
+      transition:border-color .2s ease, background .2s ease, transform .2s ease;
+    }
+    details.drill:hover{border-color:var(--line-2)}
+    details.drill[open]{border-color:var(--line-2);background:linear-gradient(180deg,#18283a,#152334)}
+    details.drill.urgent{border-left:5px solid var(--red);background:linear-gradient(180deg,#211418,#17202b);box-shadow:inset 0 0 0 1px rgba(239,68,68,.12)}
+    details.drill > summary{
+      padding:13px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      min-height:44px;
+      touch-action:manipulation;
+    }
+    details.drill .summary-main{flex:1;min-width:0}
+    details.drill .summary-row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
+    details.drill .summary-copy{color:var(--text)}
+    details.drill .details-body{
+      padding:0 13px 13px;
+      color:var(--text);
+      border-top:1px solid rgba(53,81,107,.45);
+      background:linear-gradient(180deg,rgba(8,17,26,.06),rgba(8,17,26,.14));
+    }
+    .drill-list{display:grid;gap:10px}
+    .detail-block{margin-top:10px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:rgba(8,17,26,.24)}
+    .detail-title{font:700 11px/1.1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+    .arrow{display:inline-block;min-width:12px;transition:transform .2s ease}
+    details.drill[open] .arrow, details.docs[open] .arrow{transform:rotate(90deg)}
+    .more-indicator{background:#0f1c29;color:var(--muted)}
+    .tap-hint{font-size:11px;color:var(--muted);margin-top:4px}
+    .section-note{margin-top:4px;font-size:12px;color:var(--muted)}
+
+    details.docs > summary{
+      padding:16px 18px;
+      display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
+    }
+
     @media (max-width:1100px){
       .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
       .g3,.g2,.decision-grid,.doc-grid{grid-template-columns:1fr}
@@ -130,6 +171,8 @@
       .hero,.card{padding:14px}
       .kpi-value{font-size:28px}
       .section{scroll-margin-top:148px}
+      details.drill > summary{padding:12px}
+      .more-indicator{padding:6px 8px;font-size:10px}
       .sticky-mobile-cta{
         display:flex;position:fixed;right:10px;bottom:10px;z-index:60;
         background:#3a1217;border:1px solid #6d2327;color:#fff;
@@ -175,7 +218,8 @@
     <section class="hero section" id="overview">
       <div class="eyebrow">Executive snapshot</div>
       <h1>Veela is better organized, but still blocked at the founder-decision layer.</h1>
-      <div class="muted">The data model, color logic, and command-center feel were kept. This version makes urgent decisions and red gates dominant, hides dead scaffolding, collapses docs by default, and is much easier to use on a phone.</div>
+      <div class="muted">Everything important is now clickable. Tap any card to open the underlying detail inline without leaving the dashboard.</div>
+      <div class="tap-hint">→ Tap or click any section below to expand details. Works on phone too.</div>
       <div class="divider"></div>
       <div class="statusline">
         <span class="pill red">Overall launch status: RED</span>
@@ -187,26 +231,72 @@
     </section>
 
     <section class="section grid g4" aria-label="Summary KPIs">
-      <div class="kpi urgent">
-        <div class="eyebrow">Launch status</div>
-        <div class="kpi-value">RED</div>
-        <div class="kpi-note">Still unsafe to commit timing. Four hard gates remain red.</div>
-      </div>
-      <div class="kpi urgent">
-        <div class="eyebrow">CEO decisions</div>
-        <div class="kpi-value">6</div>
-        <div class="kpi-note">Three are founder-critical and directly block movement.</div>
-      </div>
-      <div class="kpi urgent">
-        <div class="eyebrow">Red gates</div>
-        <div class="kpi-value">4</div>
-        <div class="kpi-note">OEM, Saudi, Indonesia halal route, capital classification.</div>
-      </div>
-      <div class="kpi">
-        <div class="eyebrow">Packaging posture</div>
-        <div class="kpi-value" style="color:#fde68a">AMBER</div>
-        <div class="kpi-note">Proceed only on fixed fields. Local/regulatory fields stay conditional or blocked.</div>
-      </div>
+      <details class="drill kpi urgent">
+        <summary>
+          <div class="summary-main">
+            <div class="eyebrow">Launch status</div>
+            <div class="kpi-value">RED</div>
+            <div class="kpi-note">Still unsafe to commit timing. Four hard gates remain red.</div>
+          </div>
+          <span class="more-indicator"><span class="arrow">→</span> More</span>
+        </summary>
+        <div class="details-body">
+          <div class="detail-block"><div class="detail-title">What this means</div>Launch timing should stay tentative until OEM proof, Saudi path, Indonesia halal route, and capital classification move out of red.</div>
+          <div class="detail-block"><div class="detail-title">Immediate unlock</div>The fastest unlock is founder approval for OEM outreach send or provision of a warm contact path.</div>
+        </div>
+      </details>
+      <details class="drill kpi urgent">
+        <summary>
+          <div class="summary-main">
+            <div class="eyebrow">CEO decisions</div>
+            <div class="kpi-value">6</div>
+            <div class="kpi-note">Three are founder-critical and directly block movement.</div>
+          </div>
+          <span class="more-indicator"><span class="arrow">→</span> Queue</span>
+        </summary>
+        <div class="details-body">
+          <ul>
+            <li>Critical now: OEM outreach send, capital questions, launch-scope posture.</li>
+            <li>High priority: warm contact paths, founder-ready copy batch, CDO lane reliability.</li>
+            <li>Decision queue is expanded in the next section.</li>
+          </ul>
+        </div>
+      </details>
+      <details class="drill kpi urgent">
+        <summary>
+          <div class="summary-main">
+            <div class="eyebrow">Red gates</div>
+            <div class="kpi-value">4</div>
+            <div class="kpi-note">OEM, Saudi, Indonesia halal route, capital classification.</div>
+          </div>
+          <span class="more-indicator"><span class="arrow">→</span> Gates</span>
+        </summary>
+        <div class="details-body">
+          <ul>
+            <li>Gate 1: OEM cert-pack and audit proof not started.</li>
+            <li>Gate 2: Saudi specialist/importer confirmation still missing.</li>
+            <li>Gate 3: Indonesia CICOT/BPJPH route still unproven.</li>
+            <li>Gate 4: Capital reality still not classified.</li>
+          </ul>
+        </div>
+      </details>
+      <details class="drill kpi">
+        <summary>
+          <div class="summary-main">
+            <div class="eyebrow">Packaging posture</div>
+            <div class="kpi-value" style="color:#fde68a">AMBER</div>
+            <div class="kpi-note">Proceed only on fixed fields. Local/regulatory fields stay conditional or blocked.</div>
+          </div>
+          <span class="more-indicator"><span class="arrow">→</span> Fields</span>
+        </summary>
+        <div class="details-body">
+          <ul>
+            <li>Safe now: fixed brand/system fields.</li>
+            <li>Hold: Arabic, Vietnam, halal-route, importer, and route-sensitive fields.</li>
+            <li>Discipline: CMO/CDO should only produce inside the lock matrix.</li>
+          </ul>
+        </div>
+      </details>
     </section>
 
     <section class="section card" id="decisions">
@@ -215,6 +305,7 @@
           <div class="eyebrow">Position #2 — moved up intentionally</div>
           <h2>CEO Decision Queue</h2>
           <div class="small">This sits immediately after the KPI strip because it is the founder action list.</div>
+          <div class="section-note">Every decision card opens inline for full context.</div>
         </div>
         <div class="statusline">
           <span class="pill red">3 critical now</span>
@@ -223,95 +314,145 @@
       </div>
 
       <div class="decision-grid">
-        <article class="item urgent critical">
-          <div class="row">
-            <div>
-              <div class="eyebrow">CEO-01</div>
-              <h3>Approve OEM outreach send</h3>
+        <details class="drill urgent critical">
+          <summary>
+            <div class="summary-main">
+              <div class="summary-row">
+                <div>
+                  <div class="eyebrow">CEO-01</div>
+                  <h3>Approve OEM outreach send</h3>
+                </div>
+                <span class="pill red">CRITICAL</span>
+              </div>
+              <div class="summary-copy">Approve or hold outreach to Bright Can / Petmeal / OEM targets.</div>
             </div>
-            <span class="pill red">CRITICAL</span>
+            <span class="more-indicator"><span class="arrow">→</span> Open</span>
+          </summary>
+          <div class="details-body">
+            <div class="decision-consequence"><strong>Consequence if not done:</strong> cert-pack collection does not start, OEM desk audit cannot begin, and Gate 1 stays red.</div>
+            <div class="decision-meta">
+              <span class="pill blue">Owner: CEO</span>
+              <span class="pill amber">Needed now</span>
+              <span class="pill red">Blocks Gate 1</span>
+            </div>
+            <div class="detail-block"><div class="detail-title">What opens if approved</div>OPS can send cert-pack requests immediately, begin desk-audit sequencing, and turn OEM proof collection from planning into execution.</div>
+            <div class="detail-block"><div class="detail-title">What founder can provide instead</div>Any WhatsApp number, warm intro, previous thread, or preferred contact owner for Bright Can / Petmeal.</div>
+            <div class="linkline">Source memo: <code>ops/ceo-decision-batch-v01.md</code></div>
           </div>
-          <div>Approve or hold outreach to Bright Can / Petmeal / OEM targets.</div>
-          <div class="decision-consequence"><strong>Consequence if not done:</strong> cert-pack collection does not start, OEM desk audit cannot begin, and Gate 1 stays red.</div>
-          <div class="decision-meta">
-            <span class="pill blue">Owner: CEO</span>
-            <span class="pill amber">Needed now</span>
-            <span class="pill red">Blocks Gate 1</span>
-          </div>
-          <div class="linkline">Source memo: <code>ops/ceo-decision-batch-v01.md</code></div>
-        </article>
+        </details>
 
-        <article class="item urgent critical">
-          <div class="row">
-            <div>
-              <div class="eyebrow">CEO-02</div>
-              <h3>Answer the 6 capital questions</h3>
+        <details class="drill urgent critical">
+          <summary>
+            <div class="summary-main">
+              <div class="summary-row">
+                <div>
+                  <div class="eyebrow">CEO-02</div>
+                  <h3>Answer the 6 capital questions</h3>
+                </div>
+                <span class="pill red">CRITICAL</span>
+              </div>
+              <div class="summary-copy">Complete the short-form capital classification inputs.</div>
             </div>
-            <span class="pill red">CRITICAL</span>
+            <span class="more-indicator"><span class="arrow">→</span> Open</span>
+          </summary>
+          <div class="details-body">
+            <div class="decision-consequence"><strong>Consequence if not done:</strong> Gate 3 stays red, launch posture stays hypothetical, and scenario planning remains invalid.</div>
+            <div class="decision-meta">
+              <span class="pill blue">Owner: CEO + OPS</span>
+              <span class="pill amber">Checkpoint: 2026-04-11</span>
+              <span class="pill red">Blocks launch-scope choice</span>
+            </div>
+            <div class="detail-block"><div class="detail-title">Needed output</div>A funded / partial / unfunded classification solid enough to constrain SKU count, market count, packaging scope, and spend pacing.</div>
+            <div class="detail-block"><div class="detail-title">Why this is upstream</div>Without capital classification, the launch plan cannot honestly commit to lean vs base vs stretch assumptions.</div>
+            <div class="linkline">File: <code>ops/capital-questions-short-form.md</code></div>
           </div>
-          <div>Complete the short-form capital classification inputs.</div>
-          <div class="decision-consequence"><strong>Consequence if not done:</strong> Gate 3 stays red, launch posture stays hypothetical, and scenario planning remains invalid.</div>
-          <div class="decision-meta">
-            <span class="pill blue">Owner: CEO + OPS</span>
-            <span class="pill amber">Checkpoint: 2026-04-11</span>
-            <span class="pill red">Blocks launch-scope choice</span>
-          </div>
-          <div class="linkline">File: <code>ops/capital-questions-short-form.md</code></div>
-        </article>
+        </details>
 
-        <article class="item urgent critical">
-          <div class="row">
-            <div>
-              <div class="eyebrow">CEO-03</div>
-              <h3>Choose launch-scope posture</h3>
+        <details class="drill urgent critical">
+          <summary>
+            <div class="summary-main">
+              <div class="summary-row">
+                <div>
+                  <div class="eyebrow">CEO-03</div>
+                  <h3>Choose launch-scope posture</h3>
+                </div>
+                <span class="pill red">CRITICAL</span>
+              </div>
+              <div class="summary-copy">Pick Lean, Base, or hold Stretch assumptions under current capital reality.</div>
             </div>
-            <span class="pill red">CRITICAL</span>
+            <span class="more-indicator"><span class="arrow">→</span> Open</span>
+          </summary>
+          <div class="details-body">
+            <div class="decision-consequence"><strong>Consequence if not done:</strong> SKU count, market count, packaging scope, and spending discipline remain ambiguous.</div>
+            <div class="decision-meta">
+              <span class="pill blue">Owner: CEO</span>
+              <span class="pill amber">Depends on capital memo</span>
+              <span class="pill red">Blocks downstream planning</span>
+            </div>
+            <div class="detail-block"><div class="detail-title">Decision impact</div>This sets the operating envelope for commercial sequencing, creative production load, and how many regulatory routes can be pursued in parallel.</div>
+            <div class="linkline">Reference: <code>ops/minimum-viable-launch-scenarios-v01.md</code></div>
           </div>
-          <div>Pick Lean, Base, or hold Stretch assumptions under current capital reality.</div>
-          <div class="decision-consequence"><strong>Consequence if not done:</strong> SKU count, market count, packaging scope, and spending discipline remain ambiguous.</div>
-          <div class="decision-meta">
-            <span class="pill blue">Owner: CEO</span>
-            <span class="pill amber">Depends on capital memo</span>
-            <span class="pill red">Blocks downstream planning</span>
-          </div>
-          <div class="linkline">Reference: <code>ops/minimum-viable-launch-scenarios-v01.md</code></div>
-        </article>
+        </details>
 
-        <article class="item">
-          <div class="row">
-            <div>
-              <div class="eyebrow">CEO-04</div>
-              <h3>Confirm warm contact paths for Bright Can / Petmeal</h3>
+        <details class="drill">
+          <summary>
+            <div class="summary-main">
+              <div class="summary-row">
+                <div>
+                  <div class="eyebrow">CEO-04</div>
+                  <h3>Confirm warm contact paths for Bright Can / Petmeal</h3>
+                </div>
+                <span class="pill amber">HIGH</span>
+              </div>
+              <div class="summary-copy">Share any WhatsApp numbers, warm intros, prior threads, or known contact owners already in hand.</div>
             </div>
-            <span class="pill amber">HIGH</span>
+            <span class="more-indicator"><span class="arrow">→</span> More</span>
+          </summary>
+          <div class="details-body">
+            <div class="decision-consequence"><strong>Why it matters:</strong> public-web discovery is weak; relationship access can materially shorten OEM response time.</div>
+            <div class="detail-block"><div class="detail-title">Fastest helpful input</div>Name + company + channel + whether Mayur wants outreach to come from him or be drafted for review.</div>
           </div>
-          <div>Share any WhatsApp numbers, warm intros, prior threads, or known contact owners already in hand.</div>
-          <div class="decision-consequence"><strong>Why it matters:</strong> public-web discovery is weak; relationship access can materially shorten OEM response time.</div>
-        </article>
+        </details>
 
-        <article class="item">
-          <div class="row">
-            <div>
-              <div class="eyebrow">CEO-05</div>
-              <h3>Review founder-ready copy batch</h3>
+        <details class="drill">
+          <summary>
+            <div class="summary-main">
+              <div class="summary-row">
+                <div>
+                  <div class="eyebrow">CEO-05</div>
+                  <h3>Review founder-ready copy batch</h3>
+                </div>
+                <span class="pill amber">HIGH</span>
+              </div>
+              <div class="summary-copy">Approve or revise the current review-ready CMO asset batch.</div>
             </div>
-            <span class="pill amber">HIGH</span>
+            <span class="more-indicator"><span class="arrow">→</span> More</span>
+          </summary>
+          <div class="details-body">
+            <div class="decision-consequence"><strong>Why it matters:</strong> approved copy is required before CDO production and scheduling can move.</div>
+            <div class="detail-block"><div class="detail-title">Downstream effect</div>Approval clears the CMO → CDO pipeline so designed outputs can be produced instead of continuing to queue in review.</div>
           </div>
-          <div>Approve or revise the current review-ready CMO asset batch.</div>
-          <div class="decision-consequence"><strong>Why it matters:</strong> approved copy is required before CDO production and scheduling can move.</div>
-        </article>
+        </details>
 
-        <article class="item">
-          <div class="row">
-            <div>
-              <div class="eyebrow">CEO-06</div>
-              <h3>Decide on CDO execution reliability</h3>
+        <details class="drill">
+          <summary>
+            <div class="summary-main">
+              <div class="summary-row">
+                <div>
+                  <div class="eyebrow">CEO-06</div>
+                  <h3>Decide on CDO execution reliability</h3>
+                </div>
+                <span class="pill amber">HIGH</span>
+              </div>
+              <div class="summary-copy">Keep, reassign, or replace the CDO execution lane for the next cycle.</div>
             </div>
-            <span class="pill amber">HIGH</span>
+            <span class="more-indicator"><span class="arrow">→</span> More</span>
+          </summary>
+          <div class="details-body">
+            <div class="decision-consequence"><strong>Why it matters:</strong> the CMO→CDO pipeline is clear, but execution reliability remains the weak link.</div>
+            <div class="detail-block"><div class="detail-title">Operational question</div>Is the issue model choice, workflow discipline, or lane ownership? This decision determines whether design execution can regain confidence next cycle.</div>
           </div>
-          <div>Keep, reassign, or replace the CDO execution lane for the next cycle.</div>
-          <div class="decision-consequence"><strong>Why it matters:</strong> the CMO→CDO pipeline is clear, but execution reliability remains the weak link.</div>
-        </article>
+        </details>
       </div>
     </section>
 
@@ -321,50 +462,61 @@
           <div>
             <div class="eyebrow">Launch blockers</div>
             <h2>Hard Launch Gates</h2>
+            <div class="section-note">Each gate expands to show the exact blocker and unlock.</div>
           </div>
           <span class="pill red">4 RED · 1 AMBER</span>
         </div>
         <div class="cards-tight">
-          <div class="item urgent">
-            <div class="row"><h3>OEM audit / cert proof</h3><span class="pill red">RED</span></div>
-            <div class="small">Owner: OPS · checkpoint 2026-04-08</div>
-            <ul>
-              <li>Need CEO send approval or warm contact path.</li>
-              <li>Then send cert-pack requests and begin desk audit when replies land.</li>
-            </ul>
-          </div>
-          <div class="item urgent">
-            <div class="row"><h3>SFDA / Ghad Saudi registration path</h3><span class="pill red">RED</span></div>
-            <div class="small">Owner: OPS · checkpoint 2026-04-15</div>
-            <ul>
-              <li>Need specialist/importer confirmation on SABER ↔ Ghad dependency.</li>
-              <li>Saudi timing stays unsafe until this becomes decision-grade.</li>
-            </ul>
-          </div>
-          <div class="item urgent">
-            <div class="row"><h3>BPJPH / CICOT halal recognition</h3><span class="pill red">RED</span></div>
-            <div class="small">Owner: OPS + INTEL · checkpoint 2026-04-15</div>
-            <ul>
-              <li>Need official proof or written importer/BPJPH confirmation.</li>
-              <li>Indonesia stays blocked/conditional until route certainty exists.</li>
-            </ul>
-          </div>
-          <div class="item urgent">
-            <div class="row"><h3>Capital confirmation ($150K–$250K)</h3><span class="pill red">RED</span></div>
-            <div class="small">Owner: CEO + OPS · checkpoint 2026-04-11</div>
-            <ul>
-              <li>CEO must answer the 6 capital questions in the working-capital memo.</li>
-              <li>Launch realism depends on Funded / Partial / Unfunded classification.</li>
-            </ul>
-          </div>
-          <div class="item">
-            <div class="row"><h3>Packaging compliance lock</h3><span class="pill amber">AMBER</span></div>
-            <div class="small">Owner: CMO + CDO + OPS · checkpoint 2026-04-11</div>
-            <ul>
-              <li>Proceed only on fixed elements.</li>
-              <li>Hold Vietnam / Arabic / halal-route / route-sensitive fields until OPS route calls land.</li>
-            </ul>
-          </div>
+          <details class="drill urgent">
+            <summary>
+              <div class="summary-main">
+                <div class="summary-row"><h3>OEM audit / cert proof</h3><span class="pill red">RED</span></div>
+                <div class="small">Owner: OPS · checkpoint 2026-04-08</div>
+              </div>
+              <span class="more-indicator"><span class="arrow">→</span> Expand</span>
+            </summary>
+            <div class="details-body"><ul><li>Need CEO send approval or warm contact path.</li><li>Then send cert-pack requests and begin desk audit when replies land.</li><li>This is the cleanest near-term gate unlock.</li></ul></div>
+          </details>
+          <details class="drill urgent">
+            <summary>
+              <div class="summary-main">
+                <div class="summary-row"><h3>SFDA / Ghad Saudi registration path</h3><span class="pill red">RED</span></div>
+                <div class="small">Owner: OPS · checkpoint 2026-04-15</div>
+              </div>
+              <span class="more-indicator"><span class="arrow">→</span> Expand</span>
+            </summary>
+            <div class="details-body"><ul><li>Need specialist/importer confirmation on SABER ↔ Ghad dependency.</li><li>Saudi timing stays unsafe until this becomes decision-grade.</li><li>Commercial movement for Saudi remains blocked until wording is confirmed.</li></ul></div>
+          </details>
+          <details class="drill urgent">
+            <summary>
+              <div class="summary-main">
+                <div class="summary-row"><h3>BPJPH / CICOT halal recognition</h3><span class="pill red">RED</span></div>
+                <div class="small">Owner: OPS + INTEL · checkpoint 2026-04-15</div>
+              </div>
+              <span class="more-indicator"><span class="arrow">→</span> Expand</span>
+            </summary>
+            <div class="details-body"><ul><li>Need official proof or written importer/BPJPH confirmation.</li><li>Indonesia stays blocked/conditional until route certainty exists.</li><li>No assumption should be baked into packaging until this closes.</li></ul></div>
+          </details>
+          <details class="drill urgent">
+            <summary>
+              <div class="summary-main">
+                <div class="summary-row"><h3>Capital confirmation ($150K–$250K)</h3><span class="pill red">RED</span></div>
+                <div class="small">Owner: CEO + OPS · checkpoint 2026-04-11</div>
+              </div>
+              <span class="more-indicator"><span class="arrow">→</span> Expand</span>
+            </summary>
+            <div class="details-body"><ul><li>CEO must answer the 6 capital questions in the working-capital memo.</li><li>Launch realism depends on Funded / Partial / Unfunded classification.</li><li>This is the gate that normalizes planning honesty across every lane.</li></ul></div>
+          </details>
+          <details class="drill">
+            <summary>
+              <div class="summary-main">
+                <div class="summary-row"><h3>Packaging compliance lock</h3><span class="pill amber">AMBER</span></div>
+                <div class="small">Owner: CMO + CDO + OPS · checkpoint 2026-04-11</div>
+              </div>
+              <span class="more-indicator"><span class="arrow">→</span> Expand</span>
+            </summary>
+            <div class="details-body"><ul><li>Proceed only on fixed elements.</li><li>Hold Vietnam / Arabic / halal-route / route-sensitive fields until OPS route calls land.</li><li>Packaging is no longer fully blocked, but still requires strict execution discipline.</li></ul></div>
+          </details>
         </div>
       </article>
 
@@ -373,16 +525,17 @@
           <div>
             <div class="eyebrow">Phase readiness</div>
             <h2>Phase 1A Exit Criteria</h2>
+            <div class="section-note">Tap each criterion to see what is missing.</div>
           </div>
           <span class="pill amber">1 RED · 5 AMBER</span>
         </div>
         <div class="compact-list">
-          <div class="compact-item"><div class="row"><strong>1. OEM outreach sent + cert-pack collection started</strong><span class="pill amber">AMBER</span></div><div class="small">Drafts exist. Gap is approval / warm path. No outbound send logged yet.</div></div>
-          <div class="compact-item"><div class="row"><strong>2. Primary OEM desk audit completed</strong><span class="pill red">RED</span></div><div class="small">Audit structure exists, but proof packs have not landed.</div></div>
-          <div class="compact-item"><div class="row"><strong>3. Regulatory unknowns reduced to decision-safe paths</strong><span class="pill amber">AMBER</span></div><div class="small">UAE is stronger. Indonesia, Vietnam, and Saudi still need live verification.</div></div>
-          <div class="compact-item"><div class="row"><strong>4. Packaging can proceed safely on fixed elements</strong><span class="pill amber">AMBER</span></div><div class="small">Conditional fields remain blocked or route-dependent.</div></div>
-          <div class="compact-item"><div class="row"><strong>5. Working-capital reality classified</strong><span class="pill amber">AMBER</span></div><div class="small">Waiting on CEO answers to the short-form capital questions.</div></div>
-          <div class="compact-item"><div class="row"><strong>6. Weekly review / escalation rhythm live</strong><span class="pill amber">AMBER</span></div><div class="small">Structure exists. First fixed live review still needs to happen.</div></div>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>1. OEM outreach sent + cert-pack collection started</strong><span class="pill amber">AMBER</span></div><div class="small">Drafts exist. Gap is approval / warm path.</div></div><span class="more-indicator"><span class="arrow">→</span> Why</span></summary><div class="details-body">No outbound send logged yet. This criterion clears only when requests are actually sent and proof collection begins.</div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>2. Primary OEM desk audit completed</strong><span class="pill red">RED</span></div><div class="small">Audit structure exists, but proof packs have not landed.</div></div><span class="more-indicator"><span class="arrow">→</span> Why</span></summary><div class="details-body">Framework is ready; evidence is not. This remains red until at least one primary OEM yields a usable proof pack for review.</div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>3. Regulatory unknowns reduced to decision-safe paths</strong><span class="pill amber">AMBER</span></div><div class="small">UAE is stronger. Indonesia, Vietnam, and Saudi still need live verification.</div></div><span class="more-indicator"><span class="arrow">→</span> Why</span></summary><div class="details-body">UAE is close to stable baseline, but the system still lacks decision-safe closure on the other live routes.</div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>4. Packaging can proceed safely on fixed elements</strong><span class="pill amber">AMBER</span></div><div class="small">Conditional fields remain blocked or route-dependent.</div></div><span class="more-indicator"><span class="arrow">→</span> Why</span></summary><div class="details-body">Execution can continue, but only if the team resists filling route-dependent blanks prematurely.</div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>5. Working-capital reality classified</strong><span class="pill amber">AMBER</span></div><div class="small">Waiting on CEO answers to the short-form capital questions.</div></div><span class="more-indicator"><span class="arrow">→</span> Why</span></summary><div class="details-body">A posture exists conceptually, but it is not yet founder-validated enough to govern decisions.</div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>6. Weekly review / escalation rhythm live</strong><span class="pill amber">AMBER</span></div><div class="small">Structure exists. First fixed live review still needs to happen.</div></div><span class="more-indicator"><span class="arrow">→</span> Why</span></summary><div class="details-body">Cadence documents exist, but a real recurring founder review rhythm still needs to prove itself in practice.</div></details>
         </div>
       </article>
     </section>
@@ -393,15 +546,16 @@
           <div>
             <div class="eyebrow">Promoted near the top</div>
             <h2>What Changed Since Last Cycle</h2>
+            <div class="section-note">Open each change for the operational implication.</div>
           </div>
           <span class="pill teal">TOP 5</span>
         </div>
         <div class="compact-list">
-          <div class="compact-item"><strong>NEW</strong> · Thailand OEM outreach batch expanded to 5 targets with real public contact routes and CEO-review drafts.</div>
-          <div class="compact-item"><strong>MOVED</strong> · Packaging lock improved from AMBER-RED to AMBER with a fixed/conditional field matrix.</div>
-          <div class="compact-item"><strong>NARROWED</strong> · UAE shifted to a confirmed MOCCAE baseline; remaining issue is emirate/importer layer, not federal ambiguity.</div>
-          <div class="compact-item"><strong>BLOCKED</strong> · PDF/PNG export still stalled by missing host library <code>libnspr4.so</code>.</div>
-          <div class="compact-item"><strong>ESCALATED</strong> · CDO execution reliability is now an explicit CEO decision because the lane failed twice.</div>
+          <details class="drill"><summary><div class="summary-main"><strong>NEW</strong> · Thailand OEM outreach batch expanded to 5 targets with real public contact routes and CEO-review drafts.</div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body">This is execution-ready groundwork. The remaining gap is not preparation but founder approval / access path.</div></details>
+          <details class="drill"><summary><div class="summary-main"><strong>MOVED</strong> · Packaging lock improved from AMBER-RED to AMBER with a fixed/conditional field matrix.</div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body">Creative and design lanes can move on safe fields now, which reduces idle time and prevents unnecessary total stoppage.</div></details>
+          <details class="drill"><summary><div class="summary-main"><strong>NARROWED</strong> · UAE shifted to a confirmed MOCCAE baseline; remaining issue is emirate/importer layer, not federal ambiguity.</div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body">That means UAE is no longer the main regulatory unknown; Saudi and Indonesia carry more decision risk now.</div></details>
+          <details class="drill"><summary><div class="summary-main"><strong>BLOCKED</strong> · PDF/PNG export still stalled by missing host library <code>libnspr4.so</code>.</div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body">HTML output exists, but image/PDF rendering is waiting on a host dependency install outside the dashboard file itself.</div></details>
+          <details class="drill"><summary><div class="summary-main"><strong>ESCALATED</strong> · CDO execution reliability is now an explicit CEO decision because the lane failed twice.</div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body">This is no longer just a workflow annoyance; it is affecting delivery confidence and needs an explicit lane decision.</div></details>
         </div>
       </article>
 
@@ -410,15 +564,16 @@
           <div>
             <div class="eyebrow">Immediate path</div>
             <h2>Next 7 Days — Critical Path</h2>
+            <div class="section-note">All timeline items are expandable.</div>
           </div>
           <span class="pill amber">DEADLINE SENSITIVE</span>
         </div>
         <div class="compact-list">
-          <div class="compact-item"><strong>By Apr 08:</strong> approve OEM send or provide warm contact path.</div>
-          <div class="compact-item"><strong>By Apr 11:</strong> complete capital memo answers and classify funding posture.</div>
-          <div class="compact-item"><strong>By Apr 11:</strong> keep packaging execution strictly inside fixed fields.</div>
-          <div class="compact-item"><strong>By Apr 15:</strong> close Saudi SABER/Ghad reading or define explicit fallback timing assumptions.</div>
-          <div class="compact-item"><strong>By Apr 15:</strong> close Indonesia CICOT/BPJPH proof path or define certified fallback.</div>
+          <details class="drill"><summary><div class="summary-main"><strong>By Apr 08:</strong> approve OEM send or provide warm contact path.</div><span class="more-indicator"><span class="arrow">→</span> Why</span></summary><div class="details-body">This unlocks proof collection and is the shortest path to reducing one red gate.</div></details>
+          <details class="drill"><summary><div class="summary-main"><strong>By Apr 11:</strong> complete capital memo answers and classify funding posture.</div><span class="more-indicator"><span class="arrow">→</span> Why</span></summary><div class="details-body">Without this, all launch-scope planning remains structurally fuzzy.</div></details>
+          <details class="drill"><summary><div class="summary-main"><strong>By Apr 11:</strong> keep packaging execution strictly inside fixed fields.</div><span class="more-indicator"><span class="arrow">→</span> Why</span></summary><div class="details-body">Prevents rework and avoids freezing in route-sensitive assumptions prematurely.</div></details>
+          <details class="drill"><summary><div class="summary-main"><strong>By Apr 15:</strong> close Saudi SABER/Ghad reading or define explicit fallback timing assumptions.</div><span class="more-indicator"><span class="arrow">→</span> Why</span></summary><div class="details-body">Either the route becomes decision-safe, or the plan needs an honest fallback timing stance.</div></details>
+          <details class="drill"><summary><div class="summary-main"><strong>By Apr 15:</strong> close Indonesia CICOT/BPJPH proof path or define certified fallback.</div><span class="more-indicator"><span class="arrow">→</span> Why</span></summary><div class="details-body">This keeps Indonesia from lingering in ambiguous half-commit mode.</div></details>
         </div>
       </article>
     </section>
@@ -429,39 +584,15 @@
           <div>
             <div class="eyebrow">Decision-grade only</div>
             <h2>Regulatory Closeout</h2>
+            <div class="section-note">All regulatory items now drill down inline.</div>
           </div>
           <span class="pill red">3 unresolved · 1 baseline confirmed</span>
         </div>
         <div class="list">
-          <div class="item">
-            <div class="row"><div><h3>OQ-REG-01 · Indonesia CICOT / BPJPH</h3><div class="small">Market: Indonesia</div></div><span class="pill red">NEEDS LIVE VERIFICATION</span></div>
-            <ul>
-              <li>BPJPH foreign-halal route exists.</li>
-              <li>CICOT acceptance by BPJPH remains unproven.</li>
-              <li>Keep Indonesia blocked/conditional until official list evidence or written confirmation lands.</li>
-            </ul>
-          </div>
-          <div class="item">
-            <div class="row"><div><h3>OQ-REG-02 · UAE authority path</h3><div class="small">Market: UAE</div></div><span class="pill green">CONFIRMED BASELINE</span></div>
-            <ul>
-              <li>MOCCAE is the confirmed federal baseline for animal food/feed registration.</li>
-              <li>Remaining gap is whether Dubai Municipality / ADFSA add-ons apply by importer route.</li>
-            </ul>
-          </div>
-          <div class="item">
-            <div class="row"><div><h3>OQ-REG-03 · Vietnam label rule</h3><div class="small">Market: Vietnam</div></div><span class="pill red">NEEDS LIVE VERIFICATION</span></div>
-            <ul>
-              <li>Sticker-only execution looks legally plausible for imports generally.</li>
-              <li>No pet-food-specific DAHP/MARD proof yet.</li>
-            </ul>
-          </div>
-          <div class="item">
-            <div class="row"><div><h3>OQ-REG-04 · Saudi SABER / Ghad</h3><div class="small">Market: Saudi Arabia</div></div><span class="pill red">NEEDS LIVE VERIFICATION</span></div>
-            <ul>
-              <li>SABER PCoC precedes SABER SCoC.</li>
-              <li>The unresolved question is whether Ghad is prerequisite to SABER PCoC or parallel/adjacent.</li>
-            </ul>
-          </div>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><div><h3>OQ-REG-01 · Indonesia CICOT / BPJPH</h3><div class="small">Market: Indonesia</div></div><span class="pill red">NEEDS LIVE VERIFICATION</span></div></div><span class="more-indicator"><span class="arrow">→</span> Open</span></summary><div class="details-body"><ul><li>BPJPH foreign-halal route exists.</li><li>CICOT acceptance by BPJPH remains unproven.</li><li>Keep Indonesia blocked/conditional until official list evidence or written confirmation lands.</li></ul><div class="detail-block"><div class="detail-title">Decision standard</div>No soft assumption should survive here; only official proof or direct written confirmation counts.</div></div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><div><h3>OQ-REG-02 · UAE authority path</h3><div class="small">Market: UAE</div></div><span class="pill green">CONFIRMED BASELINE</span></div></div><span class="more-indicator"><span class="arrow">→</span> Open</span></summary><div class="details-body"><ul><li>MOCCAE is the confirmed federal baseline for animal food/feed registration.</li><li>Remaining gap is whether Dubai Municipality / ADFSA add-ons apply by importer route.</li></ul><div class="detail-block"><div class="detail-title">Implication</div>UAE can stay in the stack, but importer-specific packaging/authority assumptions still need careful handling.</div></div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><div><h3>OQ-REG-03 · Vietnam label rule</h3><div class="small">Market: Vietnam</div></div><span class="pill red">NEEDS LIVE VERIFICATION</span></div></div><span class="more-indicator"><span class="arrow">→</span> Open</span></summary><div class="details-body"><ul><li>Sticker-only execution looks legally plausible for imports generally.</li><li>No pet-food-specific DAHP/MARD proof yet.</li></ul><div class="detail-block"><div class="detail-title">Current posture</div>Viable in theory, not yet strong enough to approve as a committed route.</div></div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><div><h3>OQ-REG-04 · Saudi SABER / Ghad</h3><div class="small">Market: Saudi Arabia</div></div><span class="pill red">NEEDS LIVE VERIFICATION</span></div></div><span class="more-indicator"><span class="arrow">→</span> Open</span></summary><div class="details-body"><ul><li>SABER PCoC precedes SABER SCoC.</li><li>The unresolved question is whether Ghad is prerequisite to SABER PCoC or parallel/adjacent.</li></ul><div class="detail-block"><div class="detail-title">Why commercial is blocked</div>Without this route logic, Saudi pricing, packaging wording, and distributor timing remain too speculative.</div></div></details>
         </div>
       </article>
 
@@ -470,14 +601,15 @@
           <div>
             <div class="eyebrow">Commercial posture</div>
             <h2>Distributor Priority Shortlist</h2>
+            <div class="section-note">Every distributor item opens to explain the hold condition.</div>
           </div>
           <span class="pill amber">HOLD UNTIL PROOF</span>
         </div>
         <div class="compact-list">
-          <div class="compact-item"><div class="row"><strong>Saudi Arabia — Muntajat</strong><span class="pill red">BLOCKED</span></div><div class="small">Do not move before approved KSA pack, SFDA/Ghad wording, and CIF Jeddah view.</div></div>
-          <div class="compact-item"><div class="row"><strong>Malaysia — Avant Pet Resources</strong><span class="pill amber">HOLD</span></div><div class="small">Fastest credible offline/importer path once Shopee proof exists.</div></div>
-          <div class="compact-item"><div class="row"><strong>Vietnam — CityZoo</strong><span class="pill amber">HOLD</span></div><div class="small">Wait for credible DAHP + labeling route and CIF Vietnam view.</div></div>
-          <div class="compact-item"><div class="row"><strong>UAE — Arab Land / Pet's Delight</strong><span class="pill amber">HOLD</span></div><div class="small">Wait for approved UAE pack, Dubai Municipality wording, and CIF Dubai pricing.</div></div>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>Saudi Arabia — Muntajat</strong><span class="pill red">BLOCKED</span></div><div class="small">Do not move before approved KSA pack, SFDA/Ghad wording, and CIF Jeddah view.</div></div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body">This remains blocked because regulatory ambiguity still contaminates the commercial plan. Do not approach as if route certainty exists.</div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>Malaysia — Avant Pet Resources</strong><span class="pill amber">HOLD</span></div><div class="small">Fastest credible offline/importer path once Shopee proof exists.</div></div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body">Malaysia is attractive because it can act as an early proof lane, but marketplace evidence still needs to lead the conversation.</div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>Vietnam — CityZoo</strong><span class="pill amber">HOLD</span></div><div class="small">Wait for credible DAHP + labeling route and CIF Vietnam view.</div></div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body">Commercial outreach should not outrun the label-rule closeout; otherwise it creates avoidable trust drag later.</div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>UAE — Arab Land / Pet's Delight</strong><span class="pill amber">HOLD</span></div><div class="small">Wait for approved UAE pack, Dubai Municipality wording, and CIF Dubai pricing.</div></div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body">UAE is structurally cleaner than before, but execution still depends on importer route, pricing, and local wording precision.</div></details>
         </div>
       </article>
     </section>
@@ -488,14 +620,15 @@
           <div>
             <div class="eyebrow">Marketplace order</div>
             <h2>Marketplace Launch Sequence</h2>
+            <div class="section-note">Each marketplace slot expands into its dependencies.</div>
           </div>
           <span class="pill teal">CLEANED DATA</span>
         </div>
         <div class="list">
-          <div class="item"><div class="row"><div><h3>1. Shopee Malaysia</h3><div class="small">Earliest realistic live window: Sep 2026 (tentative)</div></div><span class="pill amber">FIRST PRIORITY</span></div><ul><li>Best speed / complexity balance.</li><li>Needs MY registration ownership, landed pricing, hero assets, and rights posture.</li></ul></div>
-          <div class="item"><div class="row"><div><h3>2. Shopee Vietnam</h3><div class="small">Earliest realistic live window: Sep–Oct 2026 (tentative)</div></div><span class="pill amber">SECOND</span></div><ul><li>Strategically important, but still gated by DAHP + label path.</li><li>MY and VN can swap only if VN clears faster.</li></ul></div>
-          <div class="item"><div class="row"><div><h3>3. Amazon US</h3><div class="small">Earliest realistic live window: Oct–Nov 2026 (tentative)</div></div><span class="pill red">HEAVIER CHAIN</span></div><ul><li>Scale lane, not first-proof lane.</li><li>Needs FSVP, FDA, AAFCO/state work, and Amazon-ready asset stack.</li></ul></div>
-          <div class="item"><div class="row"><div><h3>4. Amazon UAE</h3><div class="small">Earliest realistic live window: Nov 2026–Jan 2027 (tentative)</div></div><span class="pill red">FOURTH</span></div><ul><li>Premium GCC signal, but importer/Arabic-pack/authority dependencies remain messy.</li></ul></div>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><div><h3>1. Shopee Malaysia</h3><div class="small">Earliest realistic live window: Sep 2026 (tentative)</div></div><span class="pill amber">FIRST PRIORITY</span></div></div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body"><ul><li>Best speed / complexity balance.</li><li>Needs MY registration ownership, landed pricing, hero assets, and rights posture.</li><li>Most credible first proof lane if capital remains constrained.</li></ul></div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><div><h3>2. Shopee Vietnam</h3><div class="small">Earliest realistic live window: Sep–Oct 2026 (tentative)</div></div><span class="pill amber">SECOND</span></div></div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body"><ul><li>Strategically important, but still gated by DAHP + label path.</li><li>MY and VN can swap only if VN clears faster.</li><li>Keep sequencing flexible until regulatory proof gets stronger.</li></ul></div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><div><h3>3. Amazon US</h3><div class="small">Earliest realistic live window: Oct–Nov 2026 (tentative)</div></div><span class="pill red">HEAVIER CHAIN</span></div></div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body"><ul><li>Scale lane, not first-proof lane.</li><li>Needs FSVP, FDA, AAFCO/state work, and Amazon-ready asset stack.</li><li>Should stay behind the first simpler marketplace proof lane.</li></ul></div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><div><h3>4. Amazon UAE</h3><div class="small">Earliest realistic live window: Nov 2026–Jan 2027 (tentative)</div></div><span class="pill red">FOURTH</span></div></div><span class="more-indicator"><span class="arrow">→</span> Detail</span></summary><div class="details-body"><ul><li>Premium GCC signal, but importer/Arabic-pack/authority dependencies remain messy.</li><li>Should not leapfrog simpler readiness paths.</li></ul></div></details>
         </div>
       </article>
 
@@ -504,14 +637,49 @@
           <div>
             <div class="eyebrow">Creative lane</div>
             <h2>Content Production Summary</h2>
+            <div class="section-note">Pipeline counts are now expandable.</div>
           </div>
           <span class="pill amber">REVIEW HEAVY</span>
         </div>
         <div class="compact-list">
-          <div class="compact-item"><div class="row"><strong>In review</strong><span class="pill amber">6</span></div><div class="small">Brand launch carousel v02, distributor one-pager copy v02, 3 social posts, founder review pack.</div></div>
-          <div class="compact-item"><div class="row"><strong>Draft</strong><span class="pill blue">4</span></div><div class="small">Launch announcement card v01, brand deck copy v01, one-pager copy v01, post-production briefs wave 01.</div></div>
-          <div class="compact-item"><div class="row"><strong>Approved systems</strong><span class="pill green">4</span></div><div class="small">Contact block standard, content calendar master, influencer research brief, CTA system note.</div></div>
-          <div class="compact-item"><div class="row"><strong>Next moves</strong><span class="pill teal">READY</span></div><div class="small">Clear founder review, build launch announcement card, then convert carousel copy v02 into designed output.</div></div>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>In review</strong><span class="pill amber">6</span></div><div class="small">Brand launch carousel v02, distributor one-pager copy v02, 3 social posts, founder review pack.</div></div><span class="more-indicator"><span class="arrow">→</span> Items</span></summary><div class="details-body">These items are waiting on founder review or final direction before design and scheduling can confidently continue.</div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>Draft</strong><span class="pill blue">4</span></div><div class="small">Launch announcement card v01, brand deck copy v01, one-pager copy v01, post-production briefs wave 01.</div></div><span class="more-indicator"><span class="arrow">→</span> Items</span></summary><div class="details-body">Draft-stage assets exist, but should not absorb extra polish effort until higher-priority review items move.</div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>Approved systems</strong><span class="pill green">4</span></div><div class="small">Contact block standard, content calendar master, influencer research brief, CTA system note.</div></div><span class="more-indicator"><span class="arrow">→</span> Items</span></summary><div class="details-body">These are reusable system assets. They reduce reinvention and should keep feeding future creative cycles.</div></details>
+          <details class="drill"><summary><div class="summary-main"><div class="summary-row"><strong>Next moves</strong><span class="pill teal">READY</span></div><div class="small">Clear founder review, build launch announcement card, then convert carousel copy v02 into designed output.</div></div><span class="more-indicator"><span class="arrow">→</span> Plan</span></summary><div class="details-body">The path is clear; the bottleneck is approvals and reliable CDO execution, not lack of content direction.</div></details>
+        </div>
+      </article>
+    </section>
+
+    <section class="section grid g2" id="ops-more">
+      <article class="card">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Influencer lane</div>
+            <h2>Influencer Pipeline</h2>
+            <div class="section-note">Added as a clickable drill-down section.</div>
+          </div>
+          <span class="pill blue">WATCHLIST MODE</span>
+        </div>
+        <div class="compact-list">
+          <details class="drill"><summary><div class="summary-main"><strong>Research brief approved</strong><div class="small">The pipeline structure exists and can support shortlist generation once launch geography narrows.</div></div><span class="more-indicator"><span class="arrow">→</span> More</span></summary><div class="details-body">The system has an influencer research brief, but real activation should stay downstream of launch-scope and market-priority clarity.</div></details>
+          <details class="drill"><summary><div class="summary-main"><strong>Current posture</strong><div class="small">Do not push outreach yet; keep gathering category-fit voices and creator archetypes.</div></div><span class="more-indicator"><span class="arrow">→</span> More</span></summary><div class="details-body">This avoids wasting founder attention on creators before the SKU-market story is stable enough to brief them properly.</div></details>
+          <details class="drill"><summary><div class="summary-main"><strong>Unlock condition</strong><div class="small">Marketplace priority + content approval + brand-safe launch story.</div></div><span class="more-indicator"><span class="arrow">→</span> More</span></summary><div class="details-body">Once those three pieces are stable, shortlist scoring and outreach sequencing can move quickly.</div></details>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Commercial sequence</div>
+            <h2>Distributor / Marketplace Decision Logic</h2>
+            <div class="section-note">A simple clickable summary of why sequence matters.</div>
+          </div>
+          <span class="pill amber">SEQUENCE FIRST</span>
+        </div>
+        <div class="compact-list">
+          <details class="drill"><summary><div class="summary-main"><strong>Step 1</strong><div class="small">Use the easiest credible proof lane first.</div></div><span class="more-indicator"><span class="arrow">→</span> More</span></summary><div class="details-body">Shopee Malaysia is currently the best candidate because it balances speed and complexity better than the heavier routes.</div></details>
+          <details class="drill"><summary><div class="summary-main"><strong>Step 2</strong><div class="small">Add adjacent marketplace/distributor lanes only after proof assets and landed pricing exist.</div></div><span class="more-indicator"><span class="arrow">→</span> More</span></summary><div class="details-body">This prevents Veela from presenting as overcommitted while core execution assumptions are still moving.</div></details>
+          <details class="drill"><summary><div class="summary-main"><strong>Step 3</strong><div class="small">Push heavier channels later.</div></div><span class="more-indicator"><span class="arrow">→</span> More</span></summary><div class="details-body">Amazon US and Amazon UAE should remain later-stage scale lanes, not first-proof launches.</div></details>
         </div>
       </article>
     </section>
@@ -521,37 +689,14 @@
         <div>
           <div class="eyebrow">Execution history</div>
           <h2>Execution Log</h2>
+          <div class="section-note">Each cycle card is expandable for the wins and misses.</div>
         </div>
         <span class="pill blue">Cycles 1–3</span>
       </div>
       <div class="grid g3">
-        <div class="item">
-          <h3>Cycle 1 · 2026-04-04</h3>
-          <ul>
-            <li class="log-good">Thailand OEM outreach batch created with 5 targets.</li>
-            <li class="log-good">All 4 regulatory questions updated.</li>
-            <li class="log-good">Email signature finalized with real brand logos.</li>
-            <li class="log-warn">Gate 1 stayed red; contact discovery for Bright Can / Petmeal was weak.</li>
-          </ul>
-        </div>
-        <div class="item">
-          <h3>Cycle 2 · 2026-04-04</h3>
-          <ul>
-            <li class="log-good">CEO-ready OEM outreach drafts and pricing sheet were created.</li>
-            <li class="log-good">Working-capital memo and blocker updates landed.</li>
-            <li class="log-good">UAE baseline clarified; Indonesia/Saudi ambiguity narrowed.</li>
-            <li class="log-warn">PDF/PNG export blocked by missing <code>libnspr4.so</code>.</li>
-          </ul>
-        </div>
-        <div class="item">
-          <h3>Cycle 3 · 2026-04-04</h3>
-          <ul>
-            <li class="log-good">Pricing assumptions and distributor shortlist were rebuilt.</li>
-            <li class="log-good">Lean / base / stretch launch scenarios were added.</li>
-            <li class="log-good">One-pager copy v02 and launch carousel copy v02 landed.</li>
-            <li class="log-bad">CDO lane failed twice and is now a CEO escalation item.</li>
-          </ul>
-        </div>
+        <details class="drill"><summary><div class="summary-main"><h3>Cycle 1 · 2026-04-04</h3><div class="small">Thailand OEM outreach batch created; contact discovery still weak on priority OEMs.</div></div><span class="more-indicator"><span class="arrow">→</span> Open</span></summary><div class="details-body"><ul><li class="log-good">Thailand OEM outreach batch created with 5 targets.</li><li class="log-good">All 4 regulatory questions updated.</li><li class="log-good">Email signature finalized with real brand logos.</li><li class="log-warn">Gate 1 stayed red; contact discovery for Bright Can / Petmeal was weak.</li></ul></div></details>
+        <details class="drill"><summary><div class="summary-main"><h3>Cycle 2 · 2026-04-04</h3><div class="small">Decision-support materials improved; export rendering still blocked.</div></div><span class="more-indicator"><span class="arrow">→</span> Open</span></summary><div class="details-body"><ul><li class="log-good">CEO-ready OEM outreach drafts and pricing sheet were created.</li><li class="log-good">Working-capital memo and blocker updates landed.</li><li class="log-good">UAE baseline clarified; Indonesia/Saudi ambiguity narrowed.</li><li class="log-warn">PDF/PNG export blocked by missing <code>libnspr4.so</code>.</li></ul></div></details>
+        <details class="drill"><summary><div class="summary-main"><h3>Cycle 3 · 2026-04-04</h3><div class="small">Commercial order got cleaner; CDO reliability escalated.</div></div><span class="more-indicator"><span class="arrow">→</span> Open</span></summary><div class="details-body"><ul><li class="log-good">Pricing assumptions and distributor shortlist were rebuilt.</li><li class="log-good">Lean / base / stretch launch scenarios were added.</li><li class="log-good">One-pager copy v02 and launch carousel copy v02 landed.</li><li class="log-bad">CDO lane failed twice and is now a CEO escalation item.</li></ul></div></details>
       </div>
     </section>
 
@@ -561,42 +706,18 @@
           <div>
             <div class="eyebrow">Collapsed by default</div>
             <h2>Reference Documents</h2>
-            <div class="small">The document reader was too heavy inline. It now stays closed until needed.</div>
+            <div class="small">The document reader stays closed until needed.</div>
           </div>
-          <span class="btn">Open docs</span>
+          <span class="btn"><span class="arrow">→</span> Open docs</span>
         </summary>
         <div class="docs-body">
           <div class="doc-grid">
-            <div class="doc-card">
-              <h3>ROADMAP</h3>
-              <div class="small">Living execution roadmap.</div>
-              <div class="linkline"><a href="https://raw.githubusercontent.com/mayur894/veela-org/main/ROADMAP.md" target="_blank" rel="noopener">Open raw markdown ↗</a></div>
-            </div>
-            <div class="doc-card">
-              <h3>CEO decisions</h3>
-              <div class="small">Canonical founder-decision batch.</div>
-              <div class="linkline"><a href="https://raw.githubusercontent.com/mayur894/veela-org/main/ops/ceo-decision-batch-v01.md" target="_blank" rel="noopener">Open raw markdown ↗</a></div>
-            </div>
-            <div class="doc-card">
-              <h3>Launch gates</h3>
-              <div class="small">Ops gate tracker.</div>
-              <div class="linkline"><a href="https://raw.githubusercontent.com/mayur894/veela-org/main/ops/launch-gates.md" target="_blank" rel="noopener">Open raw markdown ↗</a></div>
-            </div>
-            <div class="doc-card">
-              <h3>Regulatory tracker</h3>
-              <div class="small">All 4 OQ-REG items.</div>
-              <div class="linkline"><a href="https://raw.githubusercontent.com/mayur894/veela-org/main/intelligence/regulatory-tracker.md" target="_blank" rel="noopener">Open raw markdown ↗</a></div>
-            </div>
-            <div class="doc-card">
-              <h3>Content tracker</h3>
-              <div class="small">CMO content production tracker.</div>
-              <div class="linkline"><a href="https://raw.githubusercontent.com/mayur894/veela-org/main/cmo/content-production-tracker-v01.md" target="_blank" rel="noopener">Open raw markdown ↗</a></div>
-            </div>
-            <div class="doc-card">
-              <h3>Influencer batch</h3>
-              <div class="small">Shortlists and watchlists.</div>
-              <div class="linkline"><a href="https://raw.githubusercontent.com/mayur894/veela-org/main/cmo/influencer-identification-batch-01.md" target="_blank" rel="noopener">Open raw markdown ↗</a></div>
-            </div>
+            <details class="drill"><summary><div class="summary-main"><h3>ROADMAP</h3><div class="small">Living execution roadmap.</div></div><span class="more-indicator"><span class="arrow">→</span> Link</span></summary><div class="details-body"><div class="linkline"><a href="https://raw.githubusercontent.com/mayur894/veela-org/main/ROADMAP.md" target="_blank" rel="noopener">Open raw markdown ↗</a></div></div></details>
+            <details class="drill"><summary><div class="summary-main"><h3>CEO decisions</h3><div class="small">Canonical founder-decision batch.</div></div><span class="more-indicator"><span class="arrow">→</span> Link</span></summary><div class="details-body"><div class="linkline"><a href="https://raw.githubusercontent.com/mayur894/veela-org/main/ops/ceo-decision-batch-v01.md" target="_blank" rel="noopener">Open raw markdown ↗</a></div></div></details>
+            <details class="drill"><summary><div class="summary-main"><h3>Launch gates</h3><div class="small">Ops gate tracker.</div></div><span class="more-indicator"><span class="arrow">→</span> Link</span></summary><div class="details-body"><div class="linkline"><a href="https://raw.githubusercontent.com/mayur894/veela-org/main/ops/launch-gates.md" target="_blank" rel="noopener">Open raw markdown ↗</a></div></div></details>
+            <details class="drill"><summary><div class="summary-main"><h3>Regulatory tracker</h3><div class="small">All 4 OQ-REG items.</div></div><span class="more-indicator"><span class="arrow">→</span> Link</span></summary><div class="details-body"><div class="linkline"><a href="https://raw.githubusercontent.com/mayur894/veela-org/main/intelligence/regulatory-tracker.md" target="_blank" rel="noopener">Open raw markdown ↗</a></div></div></details>
+            <details class="drill"><summary><div class="summary-main"><h3>Content tracker</h3><div class="small">CMO content production tracker.</div></div><span class="more-indicator"><span class="arrow">→</span> Link</span></summary><div class="details-body"><div class="linkline"><a href="https://raw.githubusercontent.com/mayur894/veela-org/main/cmo/content-production-tracker-v01.md" target="_blank" rel="noopener">Open raw markdown ↗</a></div></div></details>
+            <details class="drill"><summary><div class="summary-main"><h3>Influencer batch</h3><div class="small">Shortlists and watchlists.</div></div><span class="more-indicator"><span class="arrow">→</span> Link</span></summary><div class="details-body"><div class="linkline"><a href="https://raw.githubusercontent.com/mayur894/veela-org/main/cmo/influencer-identification-batch-01.md" target="_blank" rel="noopener">Open raw markdown ↗</a></div></div></details>
           </div>
         </div>
       </details>
