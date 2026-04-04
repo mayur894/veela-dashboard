@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-04-04T06:00:06Z",
+  "updatedAt": "2026-04-04T06:33:26Z",
   "org": {
     "name": "VEELA AI ORG",
     "tagline": "CEO control panel \u2014 live model operations, launch readiness, and market execution.",
     "overallStatus": "RED",
     "overallStatusLabel": "Setup complete. Hard gates uncleared.",
-    "files": 364,
+    "files": 371,
     "wavesCompleted": 8,
     "totalWaves": 10,
     "liveMode": "Continuous department execution + QC"
@@ -79,14 +79,14 @@
     },
     {
       "name": "Google",
-      "status": "down",
-      "statusLabel": "Down",
-      "accent": "red",
+      "status": "active",
+      "statusLabel": "Active",
+      "accent": "green",
       "models": [
         {
           "id": "google/gemini-2.5-flash",
           "role": "OPS QC / fast multimodal",
-          "status": "down",
+          "status": "active",
           "testStatus": "live-tested",
           "latestOutput": "Live tested just now"
         },
@@ -245,6 +245,6 @@
   ],
   "footer": {
     "poweredBy": "Powered by Veela \ud83d\udc3e",
-    "lastUpdatedLabel": "2026-04-04 06:00 UTC"
+    "lastUpdatedLabel": "2026-04-04 06:33 UTC"
   }
 }
