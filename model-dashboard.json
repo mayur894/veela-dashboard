@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-04-04T02:00:05Z",
+  "updatedAt": "2026-04-04T02:30:02Z",
   "org": {
     "name": "VEELA AI ORG",
     "tagline": "CEO control panel \u2014 live model operations, launch readiness, and market execution.",
     "overallStatus": "RED",
     "overallStatusLabel": "Setup complete. Hard gates uncleared.",
-    "files": 227,
+    "files": 358,
     "wavesCompleted": 8,
     "totalWaves": 10,
     "liveMode": "Continuous department execution + QC"
@@ -245,6 +245,6 @@
   ],
   "footer": {
     "poweredBy": "Powered by Veela \ud83d\udc3e",
-    "lastUpdatedLabel": "2026-04-04 02:00 UTC"
+    "lastUpdatedLabel": "2026-04-04 02:30 UTC"
   }
 }
