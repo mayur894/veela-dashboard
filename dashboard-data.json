@@ -2,8 +2,8 @@
   "_meta": {
     "last_updated": "2026-04-03T15:42:00Z",
     "updated_by": "OPS / PMO",
-    "version": "2.0",
-    "dashboard_focus": "Roadmap execution by week, month, year",
+    "version": "2.1",
+    "dashboard_focus": "Command center for roadmap, active work, project board, and CEO decisions",
     "canonical_sources": [
       "ROADMAP.md",
       "ops/launch-gates.md",
@@ -11,7 +11,8 @@
       "ops/red-to-green-plan.md",
       "ops/first-launch-review-2026-W14.md",
       "PROJECT_BOARD.md"
-    ]
+    ],
+    "repo_base": "https://github.com/mayur894/veela-org"
   },
   "summary": {
     "program": "Veela launch control",
@@ -29,7 +30,17 @@
       "status": "red",
       "owner": "OPS",
       "turns_green_when": "At least one OEM has a complete audited cert pack and usable commercial path.",
-      "current_note": "OEM audit not complete; cert packs not yet collected."
+      "current_note": "OEM audit not complete; cert packs not yet collected.",
+      "links": [
+        {
+          "label": "GitHub issue",
+          "url": "https://github.com/mayur894/veela-org/issues/1"
+        },
+        {
+          "label": "Project board",
+          "url": "https://github.com/mayur894/veela-org/blob/main/PROJECT_BOARD.md"
+        }
+      ]
     },
     {
       "id": "G2",
@@ -37,7 +48,17 @@
       "status": "red",
       "owner": "OPS + INTEL",
       "turns_green_when": "All 4 critical regulatory questions have proof-backed answers and execution notes.",
-      "current_note": "OQ-REG-01/02/03/04 remain open."
+      "current_note": "OQ-REG-01/02/03/04 remain open.",
+      "links": [
+        {
+          "label": "GitHub issue",
+          "url": "https://github.com/mayur894/veela-org/issues/2"
+        },
+        {
+          "label": "Project board",
+          "url": "https://github.com/mayur894/veela-org/blob/main/PROJECT_BOARD.md"
+        }
+      ]
     },
     {
       "id": "G3",
@@ -45,7 +66,17 @@
       "status": "red",
       "owner": "CEO + OPS",
       "turns_green_when": "Funding status is explicitly classified and first production is financially executable.",
-      "current_note": "$150k-$250k not yet confirmed; capital memo still needed."
+      "current_note": "$150k-$250k not yet confirmed; capital memo still needed.",
+      "links": [
+        {
+          "label": "GitHub issue",
+          "url": "https://github.com/mayur894/veela-org/issues/3"
+        },
+        {
+          "label": "Project board",
+          "url": "https://github.com/mayur894/veela-org/blob/main/PROJECT_BOARD.md"
+        }
+      ]
     },
     {
       "id": "G4",
@@ -53,7 +84,17 @@
       "status": "amber",
       "owner": "CMO + CDO + OPS",
       "turns_green_when": "Fixed-field baseline locked; conditional fields tied to proof; blocked items isolated.",
-      "current_note": "Some structure can lock now, but VN + Arabic/regulatory-dependent fields remain unresolved."
+      "current_note": "Some structure can lock now, but VN + Arabic/regulatory-dependent fields remain unresolved.",
+      "links": [
+        {
+          "label": "GitHub issue",
+          "url": "https://github.com/mayur894/veela-org/issues/4"
+        },
+        {
+          "label": "Project board",
+          "url": "https://github.com/mayur894/veela-org/blob/main/PROJECT_BOARD.md"
+        }
+      ]
     }
   ],
   "top_blockers": [
@@ -62,35 +103,65 @@
       "title": "OEM cert packs not yet collected",
       "owner": "OPS",
       "urgency": "critical",
-      "impact": "Blocks OEM validation, production confidence, compliance confidence"
+      "impact": "Blocks OEM validation, production confidence, compliance confidence",
+      "links": [
+        {
+          "label": "Related issue",
+          "url": "https://github.com/mayur894/veela-org/issues/1"
+        }
+      ]
     },
     {
       "id": "BLK-03",
       "title": "Indonesia halal recognition unresolved (CICOT/BPJPH)",
       "owner": "OPS + INTEL",
       "urgency": "critical",
-      "impact": "Blocks halal strategy confidence and Indonesia planning"
+      "impact": "Blocks halal strategy confidence and Indonesia planning",
+      "links": [
+        {
+          "label": "Related issue",
+          "url": "https://github.com/mayur894/veela-org/issues/3"
+        }
+      ]
     },
     {
       "id": "BLK-05",
       "title": "Vietnam sticker vs printed label unresolved",
       "owner": "OPS",
       "urgency": "critical",
-      "impact": "Blocks VN packaging lock and launch-timing realism"
+      "impact": "Blocks VN packaging lock and launch-timing realism",
+      "links": [
+        {
+          "label": "Related issue",
+          "url": "https://github.com/mayur894/veela-org/issues/5"
+        }
+      ]
     },
     {
       "id": "BLK-06",
       "title": "Saudi SABER / Ghad sequence unresolved",
       "owner": "OPS + INTEL",
       "urgency": "critical",
-      "impact": "Blocks Saudi compliance sequencing and lead-time model"
+      "impact": "Blocks Saudi compliance sequencing and lead-time model",
+      "links": [
+        {
+          "label": "Related issue",
+          "url": "https://github.com/mayur894/veela-org/issues/2"
+        }
+      ]
     },
     {
       "id": "BLK-07",
       "title": "Working capital source not yet confirmed",
       "owner": "CEO + OPS",
       "urgency": "critical",
-      "impact": "Blocks production deposits, launch timing, and commitment language"
+      "impact": "Blocks production deposits, launch timing, and commitment language",
+      "links": [
+        {
+          "label": "Related issue",
+          "url": "https://github.com/mayur894/veela-org/issues/4"
+        }
+      ]
     }
   ],
   "roadmap": {
@@ -105,7 +176,7 @@
     "weekly": [
       {
         "id": "2026-W14",
-        "label": "W14 · Apr 3-5",
+        "label": "W14 \u00b7 Apr 3-5",
         "status": "active",
         "goal": "Stabilize operating control and surface hard blockers as explicit dashboard objects.",
         "focus": [
@@ -121,7 +192,7 @@
       },
       {
         "id": "2026-W15",
-        "label": "W15 · Apr 6-12",
+        "label": "W15 \u00b7 Apr 6-12",
         "status": "next",
         "goal": "Push RED gates toward AMBER.",
         "focus": [
@@ -138,7 +209,7 @@
       },
       {
         "id": "2026-W16",
-        "label": "W16 · Apr 13-19",
+        "label": "W16 \u00b7 Apr 13-19",
         "status": "queued",
         "goal": "Convert ambiguity into decision-ready notes.",
         "focus": [
@@ -154,7 +225,7 @@
       },
       {
         "id": "2026-W17",
-        "label": "W17 · Apr 20-26",
+        "label": "W17 \u00b7 Apr 20-26",
         "status": "queued",
         "goal": "Rebaseline launch assumptions based on proof.",
         "focus": [
@@ -180,7 +251,12 @@
           "Regulatory source paths active for all 4 OQs",
           "Working-capital memo v1 drafted"
         ],
-        "gates_in_play": ["G1", "G2", "G3", "G4"]
+        "gates_in_play": [
+          "G1",
+          "G2",
+          "G3",
+          "G4"
+        ]
       },
       {
         "id": "2026-05",
@@ -193,7 +269,12 @@
           "FSVP/vendor discovery started",
           "Channel launch order tightened against actual regulatory reality"
         ],
-        "gates_in_play": ["G1", "G2", "G3", "G4"]
+        "gates_in_play": [
+          "G1",
+          "G2",
+          "G3",
+          "G4"
+        ]
       },
       {
         "id": "2026-06",
@@ -206,7 +287,11 @@
           "Saudi compliance path clarified enough for realistic sequencing",
           "Funding posture supports first production planning"
         ],
-        "gates_in_play": ["G2", "G3", "G4"]
+        "gates_in_play": [
+          "G2",
+          "G3",
+          "G4"
+        ]
       },
       {
         "id": "2026-07-08",
@@ -219,7 +304,10 @@
           "Vietnam DAHP and labeling path clear enough for execution",
           "Marketplace infrastructure build begins where gates allow"
         ],
-        "gates_in_play": ["G2", "G4"]
+        "gates_in_play": [
+          "G2",
+          "G4"
+        ]
       },
       {
         "id": "2026-09",
@@ -231,7 +319,12 @@
           "Stores built and approved",
           "Production run funded and scheduled"
         ],
-        "gates_in_play": ["G1", "G2", "G3", "G4"]
+        "gates_in_play": [
+          "G1",
+          "G2",
+          "G3",
+          "G4"
+        ]
       }
     ],
     "yearly": [
@@ -301,6 +394,11 @@
   ],
   "activity": [
     {
+      "time": "2026-04-04 00:18",
+      "agent": "CEO",
+      "msg": "Dashboard upgraded into command center with Now Working, Project Board, and CEO Decisions."
+    },
+    {
       "time": "2026-04-03 15:42",
       "agent": "OPS",
       "msg": "Dashboard data model upgraded to roadmap views: weekly, monthly, yearly."
@@ -314,6 +412,271 @@
       "time": "2026-04-02 22:00",
       "agent": "CEO",
       "msg": "Canonical roadmap, launch gates, blockers register, and red-to-green plan published."
+    }
+  ],
+  "now_working": [
+    {
+      "lane": "CEO",
+      "status": "active",
+      "current": "Dashboard upgrade into command center + governance model",
+      "next": "Approve CEO decision queue and keep model/tool routing aligned",
+      "blocker": "None",
+      "last_updated": "2026-04-04 00:15",
+      "links": [
+        {
+          "label": "Dashboard repo",
+          "url": "https://github.com/mayur894/veela-dashboard"
+        },
+        {
+          "label": "Project board",
+          "url": "https://github.com/mayur894/veela-org/blob/main/PROJECT_BOARD.md"
+        }
+      ]
+    },
+    {
+      "lane": "CMO",
+      "status": "in flight",
+      "current": "Approval-ready asset batch and CTA/destination system",
+      "next": "Stand up operating-inputs file + approval tracker",
+      "blocker": "Founder approvals + live destinations",
+      "last_updated": "2026-04-03 15:38",
+      "links": [
+        {
+          "label": "Issue #6",
+          "url": "https://github.com/mayur894/veela-org/issues/6"
+        },
+        {
+          "label": "Issue #7",
+          "url": "https://github.com/mayur894/veela-org/issues/7"
+        }
+      ]
+    },
+    {
+      "lane": "CSO",
+      "status": "in flight",
+      "current": "Investor PPT prep + route proof + distributor pack logic",
+      "next": "Convert market-route proof and rights policy into investor/commercial materials",
+      "blocker": "Route proof + CEO rights decisions",
+      "last_updated": "2026-04-03 15:49",
+      "links": [
+        {
+          "label": "Issue #8",
+          "url": "https://github.com/mayur894/veela-org/issues/8"
+        },
+        {
+          "label": "Investor deck files",
+          "url": "https://github.com/mayur894/veela-org/tree/main/investor"
+        }
+      ]
+    },
+    {
+      "lane": "CDO",
+      "status": "in flight",
+      "current": "Canva template system + mockup-first rollout + packaging execution",
+      "next": "Build EN template masters and 6 core mockups",
+      "blocker": "Halal/feeding/public-safe decisions",
+      "last_updated": "2026-04-03 15:37",
+      "links": [
+        {
+          "label": "Packaging gate #5",
+          "url": "https://github.com/mayur894/veela-org/issues/5"
+        },
+        {
+          "label": "Canva skill",
+          "url": "https://github.com/mayur894/veela-org/tree/main/skills/canva"
+        }
+      ]
+    },
+    {
+      "lane": "OPS",
+      "status": "critical",
+      "current": "OEM proof collection, gate control, and weekly cadence enforcement",
+      "next": "Collect cert packs and issue Go / Warn / No-Go desk audit",
+      "blocker": "OEM documents not yet in hand",
+      "last_updated": "2026-04-03 15:37",
+      "links": [
+        {
+          "label": "Issue #1",
+          "url": "https://github.com/mayur894/veela-org/issues/1"
+        },
+        {
+          "label": "Issue #2",
+          "url": "https://github.com/mayur894/veela-org/issues/2"
+        },
+        {
+          "label": "Issue #3",
+          "url": "https://github.com/mayur894/veela-org/issues/3"
+        }
+      ]
+    },
+    {
+      "lane": "INTEL",
+      "status": "in flight",
+      "current": "Indonesia + Saudi proof packs and market-route verification",
+      "next": "Turn top regulatory questions into evidence packs with decision implications",
+      "blocker": "Official source closure not yet landed",
+      "last_updated": "2026-04-03 15:38",
+      "links": [
+        {
+          "label": "Issue #2",
+          "url": "https://github.com/mayur894/veela-org/issues/2"
+        },
+        {
+          "label": "Issue #3",
+          "url": "https://github.com/mayur894/veela-org/issues/3"
+        }
+      ]
+    }
+  ],
+  "ceo_decisions": [
+    {
+      "id": "CEO-01",
+      "title": "Channel rights default policy",
+      "urgency": "high",
+      "owner": "CEO",
+      "needed_by": "2026-04-10",
+      "decision": "Confirm non-exclusive first-touch, preserve Amazon/Noon/direct rights, country-only discussions first.",
+      "why": "CSO cannot safely structure distributor outreach without this.",
+      "links": [
+        {
+          "label": "CSO issue #8",
+          "url": "https://github.com/mayur894/veela-org/issues/8"
+        }
+      ]
+    },
+    {
+      "id": "CEO-02",
+      "title": "Halal wording / icon posture",
+      "urgency": "high",
+      "owner": "CEO + CDO + OPS",
+      "needed_by": "2026-04-07",
+      "decision": "Choose in / revise / out posture for halal wording and trust icon system.",
+      "why": "Blocks packaging/public-safe design decisions.",
+      "links": [
+        {
+          "label": "Packaging gate #5",
+          "url": "https://github.com/mayur894/veela-org/issues/5"
+        }
+      ]
+    },
+    {
+      "id": "CEO-03",
+      "title": "Working capital classification",
+      "urgency": "critical",
+      "owner": "CEO + OPS",
+      "needed_by": "2026-04-18",
+      "decision": "Classify launch as Funded / Partially funded / Unfunded based on real source.",
+      "why": "Capital remains a hard red gate and investor language depends on it.",
+      "links": [
+        {
+          "label": "Capital gate #4",
+          "url": "https://github.com/mayur894/veela-org/issues/4"
+        }
+      ]
+    },
+    {
+      "id": "CEO-04",
+      "title": "First-market sequencing",
+      "urgency": "high",
+      "owner": "CEO + OPS + INTEL + CSO",
+      "needed_by": "2026-04-25",
+      "decision": "Choose decision-safe first-market order once Malaysia/UAE/Saudi route proof improves.",
+      "why": "Without this, launch timing and GTM narrative drift.",
+      "links": [
+        {
+          "label": "Project board",
+          "url": "https://github.com/mayur894/veela-org/blob/main/PROJECT_BOARD.md"
+        }
+      ]
+    }
+  ],
+  "project_board": [
+    {
+      "bucket": "This week",
+      "items": [
+        {
+          "title": "Collect Bright Can + Petmeal cert packs",
+          "owner": "OPS",
+          "status": "critical",
+          "checkpoint": "2026-04-05",
+          "proof": "OEM cert pack or same-day gap log",
+          "link": "https://github.com/mayur894/veela-org/issues/1"
+        },
+        {
+          "title": "Open source path for OQ-REG-01/02/03/04",
+          "owner": "OPS + INTEL",
+          "status": "active",
+          "checkpoint": "2026-04-07",
+          "proof": "source-path tracker / evidence pack",
+          "link": "https://github.com/mayur894/veela-org/blob/main/ops/weekly-owner-checkin-board.md"
+        },
+        {
+          "title": "Publish BRD-002 fixed / conditional / blocked matrix",
+          "owner": "CMO + CDO + OPS",
+          "status": "active",
+          "checkpoint": "2026-04-07",
+          "proof": "decision matrix",
+          "link": "https://github.com/mayur894/veela-org/issues/5"
+        }
+      ]
+    },
+    {
+      "bucket": "Waiting on CEO",
+      "items": [
+        {
+          "title": "Rights policy default",
+          "owner": "CEO",
+          "status": "waiting",
+          "checkpoint": "2026-04-10",
+          "proof": "decision note",
+          "link": "https://github.com/mayur894/veela-org/issues/8"
+        },
+        {
+          "title": "Funding classification memo review",
+          "owner": "CEO + OPS",
+          "status": "waiting",
+          "checkpoint": "2026-04-18",
+          "proof": "capital memo",
+          "link": "https://github.com/mayur894/veela-org/issues/4"
+        },
+        {
+          "title": "Halal / public-safe posture",
+          "owner": "CEO + CDO + OPS",
+          "status": "waiting",
+          "checkpoint": "2026-04-07",
+          "proof": "review note",
+          "link": "https://github.com/mayur894/veela-org/issues/5"
+        }
+      ]
+    },
+    {
+      "bucket": "Recently completed",
+      "items": [
+        {
+          "title": "Roadmap dashboard published",
+          "owner": "CEO / PMO",
+          "status": "done",
+          "checkpoint": "2026-04-03",
+          "proof": "GitHub Pages live",
+          "link": "https://mayur894.github.io/veela-dashboard/"
+        },
+        {
+          "title": "QC system added to PM workflow",
+          "owner": "OPS / PMO",
+          "status": "done",
+          "checkpoint": "2026-04-03",
+          "proof": "ops/deliverable-qc-checklist.md",
+          "link": "https://github.com/mayur894/veela-org/blob/main/ops/deliverable-qc-checklist.md"
+        },
+        {
+          "title": "Investor deck package created",
+          "owner": "CSO",
+          "status": "done",
+          "checkpoint": "2026-04-03",
+          "proof": "investor deck spec + proof-gap tracker",
+          "link": "https://github.com/mayur894/veela-org/tree/main/investor"
+        }
+      ]
     }
   ]
 }
