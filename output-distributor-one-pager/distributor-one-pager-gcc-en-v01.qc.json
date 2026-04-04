@@ -1,0 +1,30 @@
+{
+  "assetType": "distributor-one-pager",
+  "version": "v01",
+  "input": "content/distributor-one-pager/distributor-one-pager-gcc-en-v01.json",
+  "outputs": {
+    "html": "output/distributor-one-pager/distributor-one-pager-gcc-en-v01.html",
+    "pdf": "output/distributor-one-pager/distributor-one-pager-gcc-en-v01.pdf",
+    "png": "output/distributor-one-pager/distributor-one-pager-gcc-en-v01.png"
+  },
+  "automatedChecks": {
+    "schemaValid": true,
+    "unresolvedPlaceholders": false,
+    "browserConsoleErrors": [],
+    "pageCount": 2,
+    "htmlWritten": true,
+    "pdfWritten": true,
+    "pngWritten": true,
+    "playwrightReady": true
+  },
+  "warnings": [],
+  "renderStatus": "playwright-rendered",
+  "renderNotes": [],
+  "humanReviewRequired": true,
+  "humanReviewChecklist": [
+    "Compare output against approved CMO copy before external use.",
+    "Confirm market variant, CTA destination, and contact details.",
+    "Check hierarchy, line wraps, and overflow hotspots.",
+    "Confirm no unsupported claims or certifications were introduced."
+  ]
+}
